@@ -1,0 +1,18 @@
+<table>
+  <tr>
+    <th>Atividade</th>
+    <th>Data</th>
+    <th>Local</th>
+  </tr>
+
+<% @activities.each do |activity| %>
+  <tr>
+    <td><%=h activity.name %></td>
+    <td><%=l activity.date %></td>
+    <td><%=h activity.place %></td>
+    <td><%= link_to 'Ver lista', edit_activity_path(activity) %></td>
+    <td><%= link_to 'Apagar', activity, :confirm => 'Todos os dados dessa atividade serão apagados, Você tem certeza?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+

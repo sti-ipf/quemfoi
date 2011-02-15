@@ -1,0 +1,32 @@
+<h1>Editing course</h1>
+
+<% form_for(@course) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :activity %><br />
+    <%= f.text_field :activity %>
+  </p>
+  <p>
+    <%= f.label :date %><br />
+    <%= f.date_select :date %>
+  </p>
+  <p>
+    <%= f.label :time %><br />
+    <%= f.time_select :time %>
+  </p>
+  <p>
+    <%= f.label :place %><br />
+    <%= f.text_field :place %>
+  </p>
+  <p>
+    <%= f.label :leader %><br />
+    <%= f.text_field :leader %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @course %> |
+<%= link_to 'Back', courses_path %>

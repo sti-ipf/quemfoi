@@ -1,0 +1,16 @@
+class Course < ActiveRecord::Base
+  has_many :activities
+
+  validates_presence_of :identifier
+
+  def participants_info
+    
+    @course_lenght = 0
+    activities
+    activities.each do |a|
+      activity_lenght = (a.end_time - a.start_time)
+      @course_lenght = @course_lenght + activity_lenght                     
+    end
+    @course_lenght = @course_lenght/3600
+  end
+end

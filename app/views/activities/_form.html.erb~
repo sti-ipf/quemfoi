@@ -1,0 +1,45 @@
+<% form_for [@course,@activity] do |f| %>
+<%= render "shared/error_messages", :target => @activity %>
+<div id="header">
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :date %><%= f.date_select :date %>
+ 
+    <%= f.label :start_time %><%= f.time_select :start_time %>
+
+    <%= f.label :end_time %><%= f.time_select :end_time %>
+  </p>
+  <p>
+    <%= f.label :place %><%= f.text_field :place %>
+    <%= f.label :leader %><%= f.text_field :leader %>
+  </p>
+</div>
+ <hr />
+<div id="attendance_list">
+<table id="participants">
+  <tr>
+    <th>
+       Nome
+    </th>
+    <th>
+       Segmento
+    </th>
+    <th>
+        Unidade Educacional
+    </th>
+    <th>
+        Contato
+    </th>
+  </tr>
+ <% f.fields_for :participants do |pf| %>
+   <%= render 'participant_fields', :pf => pf %>
+ <% end %>
+</table>        
+  <p><%= link_to_add_participant "Adiconar Participante" f %></p>
+ </div>
+    <%= f.submit 'Salvar' %>
+  </p>
+<% end %>

@@ -1,0 +1,23 @@
+<h1>Listas de Presença</h1>
+
+<table>
+  <tr>
+    <th>Atividade</th>
+    <th>Data</th>
+    <th>Local</th>
+  </tr>
+
+<% @courses.each do |course| %>
+  <tr>
+    <td><%=h course.activity %></td>
+    <td><%=l course.date %></td>
+    <td><%=h course.place %></td>
+<!--    <td><%= link_to 'Editar', edit_course_path(course) %></td> -->
+    <td><%= link_to 'Apagar', course, :confirm => 'Tem certeza?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nova Lista', new_course_path %>
