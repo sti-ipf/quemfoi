@@ -1,0 +1,25 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: quemfoi_development
+  pool: 5
+  username: root
+  password: root
+
+test:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: quemfoi_test
+  pool: 5
+  username: root
+  password: root
+
+production:
+  adapter: mysql
+  hostname: localhost
+  database: quemfoi
+  username: quemfoidb_user
+  password: quem9550
+
