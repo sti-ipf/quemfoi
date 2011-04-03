@@ -6,12 +6,11 @@
     <th>Frequência</th>
     <th>Aprovado?</th>
   </tr>
-
 <% @participants[:participants].each do |info| %>
   <tr>
     <td><%=h info[1][:participant].name %></td>
-    <td><%=h ((info[1][:time]/@participants[:total_time])*100).floor %></td>
-    <td><%= (info[1][:time]/@participants[:total_time])*100 > 75 ? "Sim":"Não"  %></td>
+    <td><%=h participant_frequency(info[1][:time],@participants[:total_time]) %></td>
+    <td><%= approved(info[1][:time],@participants[:total_time])  %></td>
   </tr>
 <% end %>
 </table>
@@ -19,3 +18,4 @@
 <br />
 
 <%= link_to 'Voltar', courses_path %>
+

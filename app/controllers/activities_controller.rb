@@ -17,7 +17,16 @@ class ActivitiesController < ApplicationController
   def edit
     @course = Course.find(params[:course_id])
     @activity = Activity.find(params[:id])
-    20.times { @activity.participants.build }    
+    20.times { @activity.participants.build }
+    @participants = Participant.find_all_by_activity_id(@activity.id)
+    @javascript_variable = "["
+    @participants.each do |p|
+      if @participants.last.id != p.id
+        @javascript_variable << "{name: '#{p.name}', group: '#{p.group}', unit: '#{p.unit}', contact: '#{p.contact}'},"
+      else
+        @javascript_variable << "{name: '#{p.name}', group: '#{p.group}', unit: '#{p.unit}', contact: '#{p.contact}'}]"
+      end
+    end
   end
 
   # POST /activities
@@ -65,3 +74,4 @@ class ActivitiesController < ApplicationController
     end
   end
 end
+

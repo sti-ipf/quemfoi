@@ -1,45 +1,51 @@
 <% form_for [@course,@activity] do |f| %>
-<%= render "shared/error_messages", :target => @activity %>
-<div id="header">
-  <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :date %><%= f.date_select :date %>
- 
-    <%= f.label :start_time %><%= f.time_select :start_time %>
+  <%= render "shared/error_messages", :target => @activity %>
+  <div id="header">
+    <p>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :date %><%= f.date_select :date %>
 
-    <%= f.label :end_time %><%= f.time_select :end_time %>
-  </p>
-  <p>
-    <%= f.label :place %><%= f.text_field :place %>
-    <%= f.label :leader %><%= f.text_field :leader %>
-  </p>
-</div>
- <hr />
-<div id="attendance_list">
-<table id="participants">
-  <tr>
-    <th>
-       Nome
-    </th>
-    <th>
-       Segmento
-    </th>
-    <th>
-        Unidade Educacional
-    </th>
-    <th>
-        Contato
-    </th>
-  </tr>
- <% f.fields_for :participants do |pf| %>
-   <%= render 'participant_fields', :pf => pf %>
- <% end %>
-</table>        
-  <p><%= link_to_add_participant "Adiconar Participante", f %></p>
- </div>
-    <%= f.submit 'Salvar' %>
-  </p>
+      <%= f.label :start_time %><%= f.time_select :start_time %>
+
+      <%= f.label :end_time %><%= f.time_select :end_time %>
+    </p>
+    <p>
+      <%= f.label :place %><%= f.text_field :place %>
+      <%= f.label :leader %><%= f.text_field :leader %>
+    </p>
+  </div>
+  <hr/>
+  <div id="attendance_list">
+    <table id="participants">
+      <tr>
+        <th>Nome</th>
+        <th>Segmento</th>
+        <th>Unidade Educacional</th>
+        <th>Contato</th>
+      </tr>
+     <% f.fields_for :participants do |pf| %>
+       <%= render 'participant_fields', :pf => pf %>
+     <% end %>
+    </table>
+      <p><%= link_to "Adicionar Participante", "#", :id => "add_participant" %></p>
+   </div>
+      <%= f.submit 'Salvar' %>
+    </p>
 <% end %>
+<script>
+ $(document).ready(function() {
+
+ $("#add_participant").click(function() {
+  var c = $("#participants tr").length - 1;
+  row = "<tr> <td><input type='text' size='30' name='activity[participants_attributes][" + c + "][name]' id='activity_participants_attributes_"+ c + "_name' autocomplete='off' class='ac_input'></td><td><input type='text' size='30' name='activity[participants_attributes][" + c + "][group]' id='activity_participants_attributes_"+ c + "_group' autocomplete='off' class='ac_input'></td><td><input type='text' size='30' name='activity[participants_attributes][" + c + "][unit]' id='activity_participants_attributes_"+ c + "_unit' autocomplete='off' class='ac_input'></td><td><input type='text' size='30' name='activity[participants_attributes][" + c + "][contact]' id='activity_participants_attributes_"+ c + "_contact' autocomplete='off' class='ac_input'></td></tr>"
+  $(row).appendTo($('#participants'));
+  js = "<script>  $(document).ready(function(){  function findValueCallbackc(event, data, formatted) {    $('#activity_participants_attributes_" + c + "_group').val(formatted.split('-')[1]);    $('#activity_participants_attributes_" + c + "_unit').val(formatted.split('-')[2]);    $('#activity_participants_attributes_" + c + "_contact').val(formatted.split('-')[3]);  }  $('#activity_participants_attributes_" + c + "_name').result(findValueCallbackc);  var names = <%=@javascript_variable%>;  $( '#activity_participants_attributes_" + c + "_name' ).autocomplete(names, {    minChars: 0,    width: 310,    matchContains: 'word',    autoFill: false,    formatItem: function(row, i, max) {                  return row.name + ' - ' + row.group + ' - ' + row.unit + ' - ' + row.contact;                },    formatMatch: function(row, i, max) {                   return row.name + '-' + row.group + '-' + row.unit + '-' + row.contact;                 },    formatResult: function(row) {                    return row.name;                  }    });  });<\/script>"
+  $(js).appendTo($('#participants'));
+ });
+
+ });
+</script>
+

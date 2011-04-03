@@ -80,12 +80,12 @@ class CoursesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def participants_status
     @participants = Course.find(params[:id]).participants_info
-    debugger
     respond_to do |format|
       format.html
     end
   end
 end
+

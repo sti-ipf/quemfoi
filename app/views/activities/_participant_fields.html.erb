@@ -1,14 +1,39 @@
- <tr>
-   <td>
-     <%= pf.text_field :name %>
-   </td>
-   <td>
-     <%= pf.text_field :group %>
-   </td>
-   <td>
-     <%= pf.text_field :unit %>
-   </td>
-   <td>
-     <%= pf.text_field :contact %>
-   </td>
- </tr>
+<tr>
+  <td><%= pf.text_field :name %></td>
+  <td><%= pf.text_field :group %></td>
+  <td><%= pf.text_field :unit %></td>
+  <td><%= pf.text_field :contact %></td>
+</tr>
+
+<% @i ||= 0 %>
+<% @i += 1 %>
+<script>
+  $(document).ready(function(){
+
+  function findValueCallback<%=@i%>(event, data, formatted) {
+    $("#activity_participants_attributes_" + <%=@i%> + "_group").val(formatted.split("-")[1]);
+    $("#activity_participants_attributes_" + <%=@i%> + "_unit").val(formatted.split("-")[2]);
+    $("#activity_participants_attributes_" + <%=@i%> + "_contact").val(formatted.split("-")[3]);
+  }
+
+  $("#activity_participants_attributes_" + <%=@i%> + "_name").result(findValueCallback<%=@i%>);
+
+  var names = <%=@javascript_variable%>
+  $( "#activity_participants_attributes_" + <%=@i%> + "_name" ).autocomplete(names, {
+    minChars: 0,
+    width: 310,
+    matchContains: "word",
+    autoFill: false,
+    formatItem: function(row, i, max) {
+                  return row.name + " - " + row.group + " - " + row.unit + " - " + row.contact;
+                },
+    formatMatch: function(row, i, max) {
+                   return row.name + "-" + row.group + "-" + row.unit + "-" + row.contact;
+                 },
+    formatResult: function(row) {
+                    return row.name;
+                  }
+    });
+  });
+</script>
+
