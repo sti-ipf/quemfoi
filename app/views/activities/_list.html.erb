@@ -11,7 +11,7 @@
     <td><%=l activity.date %></td>
     <td><%=h activity.place %></td>
     <td><%= link_to 'Ver lista', edit_course_activity_path(activity.course_id,activity.id) %></td>
-    <td><%= link_to 'Apagar', course_activity_path(activity.course_id, activity.id), :confirm => 'Todos os dados dessa atividade serão apagados, Você tem certeza?', :method => :delete %></td>
+    <td><%= button_to 'Apagar', {:controller => 'activities', :action => 'destroy', :course_id => activity.course_id, :id => activity.id}, :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -10,7 +10,7 @@
     <td><%=h course.identifier %></td>
     <td><%= link_to 'Ver Atividades', course %></td>
     <td><%= link_to 'Editar', edit_course_path(course) %></td>
-    <td><%= link_to 'Apagar', course, :method => :delete, :confirm => 'Todos os dados dessa formação serão apagados, Você tem certeza?'%></td>
+    <td><%= button_to 'Apagar', {:action => 'destroy', :id => course.id}, :method => :delete %></td>
     <td><%= link_to 'Relatório de Frequência', participants_status_course_path(course) %></td>
   </tr>
 <% end %>
