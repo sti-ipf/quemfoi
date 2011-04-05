@@ -5,6 +5,7 @@ class ActivitiesController < ApplicationController
   # GET /activities/new.xml
   def new
     @course = Course.find(params[:course_id])
+    @javascript_hash = @course.participants_as_javascript_hash
     @activity = @course.activities.build
     80.times { @activity.participants.build }
     respond_to do |format|
@@ -18,15 +19,7 @@ class ActivitiesController < ApplicationController
     @course = Course.find(params[:course_id])
     @activity = Activity.find(params[:id])
     20.times { @activity.participants.build }
-    @participants = Participant.find_all_by_activity_id(@activity.id)
-    @javascript_variable = "["
-    @participants.each do |p|
-      if @participants.last.id != p.id
-        @javascript_variable << "{name: '#{p.name}', group: '#{p.group}', unit: '#{p.unit}', contact: '#{p.contact}'},"
-      else
-        @javascript_variable << "{name: '#{p.name}', group: '#{p.group}', unit: '#{p.unit}', contact: '#{p.contact}'}]"
-      end
-    end
+    @javascript_hash = @course.participants_as_javascript_hash
   end
 
   # POST /activities

@@ -1,0 +1,17 @@
+activity_one:
+  name: "Ruby Syntax"
+  date: DateTime.now
+  place: "IPF"
+  leader: "Fulano da Silva"
+  start_time: "14:00"
+  end_time: "15:00"
+  course: ruby
+activity_two:
+  name: "First program with Ruby"
+  date: DateTime.tomorrow
+  place: "IPF"
+  leader: "Fulano da Silva"
+  start_time: "14:00"
+  end_time: "15:00"
+  course: ruby
+

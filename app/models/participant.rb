@@ -1,7 +1,5 @@
 class Participant < ActiveRecord::Base
-  belongs_to :course
+  belongs_to :activity
 
-  def <=>(other)
-    name <=> other.name
-  end
 end
+

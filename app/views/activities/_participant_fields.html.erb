@@ -6,7 +6,6 @@
 </tr>
 
 <% @i ||= 0 %>
-<% @i += 1 %>
 <script>
   $(document).ready(function(){
 
@@ -18,7 +17,7 @@
 
   $("#activity_participants_attributes_" + <%=@i%> + "_name").result(findValueCallback<%=@i%>);
 
-  var names = <%=@javascript_variable%>
+  var names = <%=@javascript_hash%>
   $( "#activity_participants_attributes_" + <%=@i%> + "_name" ).autocomplete(names, {
     minChars: 0,
     width: 310,
@@ -36,4 +35,5 @@
     });
   });
 </script>
+<% @i += 1 %>
 

@@ -16,10 +16,10 @@ test:
   username: root
   password: root
 
-production:
-  adapter: mysql
-  hostname: localhost
-  database: quemfoi
-  username: quemfoidb_user
-  password: quem9550
+#production:
+#  adapter: mysql
+#  hostname: localhost
+#  database: quemfoi
+#  username: quemfoidb_user
+#  password: quem9550
 
