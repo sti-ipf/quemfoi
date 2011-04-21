@@ -12,6 +12,8 @@ Quemfoi::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  mount Resque::Server.new, :at => "/resque"
+
 
   resources :courses  do
     resources :activities, :except => [ :index, :show ]
@@ -19,7 +21,7 @@ Quemfoi::Application.routes.draw do
       get 'participants_status'
     end
   end
-  
+
   # Sample resource route with options:
   #   resources :products do
   #     member do
@@ -58,10 +60,11 @@ Quemfoi::Application.routes.draw do
   # root :to => "welcome#index"
 
   root :to => 'courses#index'
-  
+
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
 end
+

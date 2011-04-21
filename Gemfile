@@ -7,7 +7,7 @@ gem 'jquery-rails'
 gem 'mysql'
 gem 'ruby-debug'
 gem 'prawn'
-gem 'resque'
+gem "resque", :require => "resque/server"
 gem 'resque_mailer'
 gem 'redis'
 gem 'redis-namespace'
@@ -17,6 +17,8 @@ gem 'sinatra'
 gem 'god'
 gem 'whenever'
 gem 'brstring'
+gem 'SystemTimer'
+gem 'json'
 
 group :development, :test do
   gem 'rspec-rails'
