@@ -16,3 +16,4 @@ class CreateActivities < ActiveRecord::Migration
     drop_table :activities
   end
 end
+

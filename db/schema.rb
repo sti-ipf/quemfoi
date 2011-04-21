@@ -10,15 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101214164822) do
+ActiveRecord::Schema.define(:version => 20110421023138) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
     t.date     "date"
     t.string   "place"
     t.string   "leader"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20101214164822) do
     t.datetime "updated_at"
     t.string   "identifier"
     t.text     "description"
+    t.boolean  "certificates_generated", :default => false
   end
 
   create_table "participants", :force => true do |t|
