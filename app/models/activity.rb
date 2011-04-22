@@ -7,7 +7,7 @@ class Activity < ActiveRecord::Base
   validates_presence_of :name, :date, :start_time, :end_time, :place
 
   def duration
-    (end_time - start_time)/3600
+    (self.end_time - self.start_time)/3600
   end
 end
 

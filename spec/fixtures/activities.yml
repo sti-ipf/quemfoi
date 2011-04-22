@@ -1,17 +1,17 @@
 activity_one:
   name: "Ruby Syntax"
-  date: DateTime.now
+  date: <%= DateTime.now %>
   place: "IPF"
   leader: "Fulano da Silva"
-  start_time: "14:00"
-  end_time: "15:00"
+  start_time: <%= DateTime.now - 1.hour %>
+  end_time: <%= DateTime.now %>
   course: ruby
 activity_two:
   name: "First program with Ruby"
-  date: DateTime.tomorrow
+  date: <%= DateTime.now %>
   place: "IPF"
   leader: "Fulano da Silva"
-  start_time: "14:00"
-  end_time: "15:00"
+  start_time: <%= DateTime.now - 1.hour %>
+  end_time: <%= DateTime.now %>
   course: ruby
 

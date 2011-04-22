@@ -28,6 +28,9 @@ describe Course do
 
   describe 'participants_info' do
     it 'participant with 100% of frequency' do
+      @ruby_course.activities.each do |a|
+        puts a.inspect
+      end
       participants_info = @ruby_course.participants_info
       participants_info[:participants][@participant_with_100_frequence.name][:time].should == participants_info[:total_time]
     end

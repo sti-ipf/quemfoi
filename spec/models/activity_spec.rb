@@ -48,14 +48,15 @@ describe Activity do
 
   it 'rejects participant if his name is blank' do
     activity = Activity.create(:name => "Create Hello World App", :date => Date.tomorrow,
-                :start_time => DateTime.now + 1.day,
-                :end_time => DateTime.now + 1.day + 2.hours, :place => "IPF",
+                :start_time => "Thu, 21 Apr 2011 13:00:00 -0300",
+                :end_time => "Thu, 21 Apr 2011 14:00:00 -0300", :place => "IPF",
                 :participants_attributes => {"0" => {:name => "João"}, "1" => {:name => ""}})
     activity.participants.count.should == 1
   end
 
   describe 'duration' do
     it 'return 1 when activity duration has 1 duration' do
+      @ruby_activity.save
       @ruby_activity.duration.should == 1
     end
   end

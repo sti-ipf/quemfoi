@@ -5,7 +5,7 @@ defaults: &defaults
 development:
   <<: defaults
 
-staging:
+test:
   <<: defaults
 
 production:

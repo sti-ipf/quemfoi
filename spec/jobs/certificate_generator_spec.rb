@@ -25,7 +25,9 @@ describe CertificateGenerator do
   end
 
   it 'generate all certificates' do
-    CertificateGenerator.generate
+    Course.all.each do |course|
+      CertificateGenerator.generate(course.id)
+    end
     total_files = Dir['public/certificates/*.pdf'].count
     total_participants = get_total_of_participants
     total_files.should eq(total_participants)
