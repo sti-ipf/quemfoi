@@ -1,5 +1,6 @@
 class Activity < ActiveRecord::Base
-  has_many :participants
+  has_many :activities_participants
+  has_many :participants, :through => :activities_participants
   belongs_to :course
   accepts_nested_attributes_for :participants,
                                 :reject_if => lambda { |a| a[:name].blank? }

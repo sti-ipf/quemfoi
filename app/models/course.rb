@@ -1,5 +1,7 @@
 class Course < ActiveRecord::Base
   has_many :activities
+  has_many :participants
+  has_many :certificates
 
   validates_presence_of :identifier
 

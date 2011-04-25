@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110421023138) do
+ActiveRecord::Schema.define(:version => 20110425225441) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,25 @@ ActiveRecord::Schema.define(:version => 20110421023138) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
+  end
+
+  create_table "activities_participants", :id => false, :force => true do |t|
+    t.integer  "activity_id",    :null => false
+    t.integer  "participant_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities_participants", ["activity_id", "participant_id"], :name => "index_activities_participants_on_activity_id_and_participant_id", :unique => true
+
+  create_table "certificates", :force => true do |t|
+    t.string   "period"
+    t.integer  "total_hours"
+    t.integer  "frequency"
+    t.integer  "participant_id"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "courses", :force => true do |t|
@@ -39,7 +58,6 @@ ActiveRecord::Schema.define(:version => 20110421023138) do
     t.string   "contact"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "activity_id"
   end
 
 end

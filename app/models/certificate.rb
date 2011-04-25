@@ -1,13 +1,15 @@
-class Certificate
+class Certificate < ActiveRecord::Base
+  belongs_to :participant
+  belongs_to :course
 
-  def initialize(params={})
-    @student = params[:student]
-    @course_identifier = params[:course_identifier]
-    @course_description = params[:course_description]
-    @period = params[:period]
-    @total_hours = params[:total_hours]
-    @frequency = params[:frequency]
-  end
+#  def initialize(params={})
+#    @student = params[:student]
+#    @course_identifier = params[:course_identifier]
+#    @course_description = params[:course_description]
+#    @period = params[:period]
+#    @total_hours = params[:total_hours]
+#    @frequency = params[:frequency]
+#  end
 
   def save(path)
     create_pdf_file
