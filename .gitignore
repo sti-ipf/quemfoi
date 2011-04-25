@@ -6,3 +6,5 @@ tmp
 public/system
 **.orig
 .rvmrc
+*~
+*.swp
