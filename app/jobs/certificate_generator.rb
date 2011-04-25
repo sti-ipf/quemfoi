@@ -18,7 +18,8 @@ class CertificateGenerator
       total_hours = participants[:total_time].to_i
       c = Certificate.new(
         :student => student,
-        :course => course.description,
+        :course_identifier => course.identifier,
+        :course_description => course.description,
         :total_hours => total_hours,
         :frequency => frequency,
         :period => "#{start_date} à #{end_date}")
