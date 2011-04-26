@@ -41,18 +41,22 @@
 </script>
 
 <div id="email_with_certificate">
- <% form_tag certificate_send_to_participant_path do %>
+  Informe o seu e-mail para receber o certificado:
+  <% form_tag certificate_send_email_path do %>
    <%= text_field_tag :email, '', :size => 20 %>
    <%= hidden_field_tag :participant_id, @participant.id %>
+   <%= hidden_field_tag :to_support, false %>
    <%= submit_tag t('send'), :disable_with => t('please_wait')%>
- <% end %>
+  <% end %>
 </div>
 
 <div id="email_to_support">
- <% form_tag certificate_send_to_support_path do %>
+  Informe o seu e-mail para que póssamos entrar em contato a respeito da correção do certificado:
+  <% form_tag certificate_send_email_path do %>
    <%= text_field_tag :email, '', :size => 20 %>
    <%= hidden_field_tag :participant_id, @participant.id %>
+   <%= hidden_field_tag :to_support, true %>
    <%= submit_tag t('send'), :disable_with => t('please_wait')%>
- <% end %>
+  <% end %>
 </div>
 

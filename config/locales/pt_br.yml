@@ -3,6 +3,7 @@ pt_br:
   search: 'Buscar'
   send: "Enviar"
   please_wait: "Aguarde..."
+  back: "Voltar"
   activerecord:
     models:
       activity: Atividade
