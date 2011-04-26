@@ -1,19 +1,13 @@
-ademar_activity_one:
+ademar:
   name: "Ademar da Silva"
   group: "Grupo 1"
   unit: "Escola da Silva"
   contact: "ademar.silva@silva.com.br"
-  activity: activity_one
-ademar_activity_two:
-  name: "Ademar da Silva"
-  group: "Grupo 1"
-  unit: "Escola da Silva"
-  contact: "ademar.silva@silva.com.br"
-  activity: activity_two
-valdemar_activity_one:
+  course: ruby
+valdemar:
   name: "Valdemar da Silva"
   group: "Grupo 1"
   unit: "Escola da Silva"
   contact: "valdemar.silva@silva.com.br"
-  activity: activity_one
+  course: ruby
 

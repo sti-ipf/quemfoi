@@ -27,6 +27,7 @@ class ActivitiesController < ApplicationController
   def create
     @course = Course.find(params[:course_id])
     @activity = @course.activities.build(params[:activity])
+#    @activity.participants.each {|p| p.course_id = @course.id }
     respond_to do |format|
       if @activity.save
         format.html { redirect_to( course_path(params[:course_id]), :notice => 'Lista de presença salva com sucesso') }

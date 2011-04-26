@@ -5,32 +5,43 @@ class Course < ActiveRecord::Base
 
   validates_presence_of :identifier
 
-  def participants_info
-    @course_duration = 0
-    @participants = {}
+  def total_time
+    total_time = 0
+    activities.each do |a|
+      total_time += a.duration
+    end
+    total_time
+  end
+
+  def start_date
     start_date = nil
-    end_date = nil
     activities.each do |a|
       start_date = a.start_time if start_date.nil? || a.start_time < start_date
-      end_date = a.end_time if end_date.nil? || a.end_time > end_date
-      activity_duration = a.duration
-      @course_duration += activity_duration
-      a.participants.each do |p|
-        if @participants[p.name]
-          @participants[p.name][:time] = @participants[p.name][:time] + activity_duration
-        else
- 	        @participants[p.name] = { :participant => p, :time => activity_duration }
-        end
-      end
     end
-    @participants.delete_if { |key,value| key == "" }
-    { :total_time => @course_duration, :participants => @participants,
-      :start_date => start_date.strftime("%d/%m/%Y"), :end_date => end_date.strftime("%d/%m/%Y")}
+    start_date
+  end
+
+  def end_date
+    end_date = nil
+    activities.each do |a|
+      end_date = a.end_time if end_date.nil? || a.end_time > end_date
+    end
+    end_date
+  end
+
+  def participants_info
+    info_about_participants = []
+    participants.each do |p|
+      participant_total_time = 0
+      p.activities.each do |a|
+        participant_total_time += a.duration
+      end
+      info_about_participants << [p, participant_total_time]
+    end
+    info_about_participants
   end
 
   def participants_as_javascript_hash
-    activities_ids = self.activities.collect(&:id).join(',')
-    participants = (activities_ids.blank?)? [] : Participant.all(:conditions => "activity_id IN (#{activities_ids})")
     javascript_hash = "["
     participants.each do |p|
       if participants.last.id != p.id

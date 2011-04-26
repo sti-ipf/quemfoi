@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-controllers-courses_controller_rb.html">app/controllers/courses_controller.rb</a></td>
-            <td class='right_align'><tt>91</tt></td>
-            <td class='right_align'><tt>64</tt></td>
+            <td class='right_align'><tt>95</tt></td>
+            <td class='right_align'><tt>68</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -561,49 +561,73 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line85">85</a>     @participants = Course.find(params[:id]).participants_info</pre></td>
+            <td><pre><a name="line85">85</a>     @course = Course.find(params[:id])</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line86">86</a>     respond_to do |format|</pre></td>
+            <td><pre><a name="line86">86</a>     @participants = @course.participants_info</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line87">87</a>       format.html</pre></td>
+            <td><pre><a name="line87">87</a>     @course_total_time = @course.total_time</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line88">88</a>     puts @participants.inspect</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line89">89</a>     puts @participants.count</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line90">90</a>     respond_to do |format|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line91">91</a>       format.html</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line88">88</a>     end</pre></td>
+            <td><pre><a name="line92">92</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line89">89</a>   end</pre></td>
+            <td><pre><a name="line93">93</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line90">90</a> end</pre></td>
+            <td><pre><a name="line94">94</a> end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line91">91</a> </pre></td>
+            <td><pre><a name="line95">95</a> </pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Fri Apr 22 00:25:54 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
+    <p>Generated on Mon Apr 25 23:52:20 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
 
   </body>
 </html>

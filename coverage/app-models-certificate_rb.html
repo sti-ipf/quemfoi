@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-models-certificate_rb.html">app/models/certificate.rb</a></td>
-            <td class='right_align'><tt>40</tt></td>
-            <td class='right_align'><tt>33</tt></td>
+            <td class='right_align'><tt>35</tt></td>
+            <td class='right_align'><tt>29</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -57,49 +57,49 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line1">1</a> class Certificate</pre></td>
+            <td><pre><a name="line1">1</a> class Certificate &lt; ActiveRecord::Base</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line2">2</a>   belongs_to :participant</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line3">3</a>   belongs_to :course</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line2">2</a> </pre></td>
+            <td><pre><a name="line4">4</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line3">3</a>   def initialize(params={})</pre></td>
+            <td><pre><a name="line5">5</a>   def save</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line4">4</a>     @student = params[:student]</pre></td>
+            <td><pre><a name="line6">6</a>     create_pdf_file</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line5">5</a>     @course = params[:course]</pre></td>
+            <td><pre><a name="line7">7</a>     fill_with_data</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line6">6</a>     @period = params[:period]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line7">7</a>     @total_hours = params[:total_hours]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line8">8</a>     @frequency = params[:frequency]</pre></td>
+            <td><pre><a name="line8">8</a>     @pdf_file.render_file(file_path)</pre></td>
           </tr>
         
           
@@ -117,187 +117,157 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line11">11</a>   def save(path)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line12">12</a>     create_pdf_file</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line13">13</a>     fill_with_data</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line14">14</a>     @pdf_file.render_file(path)</pre></td>
+            <td><pre><a name="line11">11</a> private</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line15">15</a>   end</pre></td>
+            <td><pre><a name="line12">12</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line13">13</a>   def fill_with_data</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line14">14</a>     @pdf_file.draw_text participant.name, :at =&gt; [157,316], :size =&gt; 14</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line15">15</a>     @pdf_file.draw_text course.identifier, :at =&gt; [50,294], :size =&gt; 14</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line16">16</a>     @pdf_file.draw_text period, :at =&gt; [220,252], :size =&gt; 14</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line17">17</a>     @pdf_file.draw_text total_hours, :at =&gt; [547,252], :size =&gt; 14</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line18">18</a>     @pdf_file.draw_text frequency, :at =&gt; [678,252], :size =&gt; 14</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line19">19</a>     @pdf_file.draw_text I18n.localize(Time.now).split(',')[1], :at =&gt; [100,200], :size =&gt; 14</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line20">20</a>     @pdf_file.draw_text course.description, :at =&gt; [542,100], :size =&gt; 10</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line16">16</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line17">17</a> private</pre></td>
+            <td><pre><a name="line21">21</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line18">18</a> </pre></td>
+            <td><pre><a name="line22">22</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line19">19</a>   def fill_with_data</pre></td>
+            <td><pre><a name="line23">23</a>   def create_pdf_file</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line20">20</a>     @pdf_file.draw_text @student, :at =&gt; [157,316], :size =&gt; 14</pre></td>
+            <td><pre><a name="line24">24</a>     @pdf_file = Prawn::Document.new(:template =&gt; &quot;#{RAILS_ROOT}/lib/certificate/certificado_pec_ementa.pdf&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line21">21</a>     @pdf_file.draw_text @course, :at =&gt; [50,294], :size =&gt; 14</pre></td>
+            <td><pre><a name="line25">25</a>     @pdf_file.font_families.update(</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line22">22</a>     @pdf_file.draw_text @period, :at =&gt; [220,252], :size =&gt; 14</pre></td>
+            <td><pre><a name="line26">26</a>         &quot;pt sans&quot; =&gt; {:normal =&gt; &quot;#{RAILS_ROOT}/public/fonts/PT_Sans-Regular.ttf&quot;,</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line23">23</a>     @pdf_file.draw_text @total_hours, :at =&gt; [547,252], :size =&gt; 14</pre></td>
+            <td><pre><a name="line27">27</a>                       :bold =&gt; &quot;#{RAILS_ROOT}/public/fonts/PT_Sans-Bold.ttf&quot;,</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line24">24</a>     @pdf_file.draw_text @frequency, :at =&gt; [678,252], :size =&gt; 14</pre></td>
+            <td><pre><a name="line28">28</a>                       :italic =&gt; &quot;#{RAILS_ROOT}/public/fonts/PT_Sans-Italic.ttf&quot;,</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line25">25</a>     @pdf_file.draw_text I18n.localize(Time.now).split(',')[1], :at =&gt; [100,200], :size =&gt; 14</pre></td>
+            <td><pre><a name="line29">29</a>                       :bolditalic =&gt; &quot;#{RAILS_ROOT}/public/fonts/PT_Sans-BoldItalic.ttf&quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line26">26</a>   end</pre></td>
+            <td><pre><a name="line30">30</a>                       })</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line31">31</a>     @pdf_file.font &quot;pt sans&quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line27">27</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line28">28</a>   def create_pdf_file</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line29">29</a>     @pdf_file = Prawn::Document.new(:template =&gt; &quot;#{RAILS_ROOT}/lib/certificate/certificado_pec_ementa.pdf&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line30">30</a>     @pdf_file.font_families.update(</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line31">31</a>         &quot;pt sans&quot; =&gt; {:normal =&gt; &quot;#{RAILS_ROOT}/public/fonts/PT_Sans-Regular.ttf&quot;,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line32">32</a>                       :bold =&gt; &quot;#{RAILS_ROOT}/public/fonts/PT_Sans-Bold.ttf&quot;,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line33">33</a>                       :italic =&gt; &quot;#{RAILS_ROOT}/public/fonts/PT_Sans-Italic.ttf&quot;,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line34">34</a>                       :bolditalic =&gt; &quot;#{RAILS_ROOT}/public/fonts/PT_Sans-BoldItalic.ttf&quot;</pre></td>
+            <td><pre><a name="line32">32</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line35">35</a>                       })</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line36">36</a>     @pdf_file.font &quot;pt sans&quot;</pre></td>
+            <td><pre><a name="line33">33</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line37">37</a>   end</pre></td>
+            <td><pre><a name="line34">34</a> end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line38">38</a> </pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line39">39</a> end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line40">40</a> </pre></td>
+            <td><pre><a name="line35">35</a> </pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Fri Apr 22 00:25:55 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
+    <p>Generated on Mon Apr 25 23:52:20 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
 
   </body>
 </html>

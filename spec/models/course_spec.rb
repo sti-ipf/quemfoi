@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Course do
 
-  fixtures :activities, :participants, :courses
+  fixtures :activities, :participants, :courses, :activities_participants
 
   before(:each) do
     @ruby_course = courses(:ruby)
@@ -28,21 +28,28 @@ describe Course do
 
   describe 'participants_info' do
     it 'participant with 100% of frequency' do
-      @ruby_course.activities.each do |a|
-        puts a.inspect
-      end
       participants_info = @ruby_course.participants_info
-      participants_info[:participants][@participant_with_100_frequence.name][:time].should == participants_info[:total_time]
+      course_total_time = @ruby_course.total_time
+      participants_info.each do |p|
+        if p[0].name == @participant_with_100_frequence.name
+          p[1].should == course_total_time
+        end
+      end
     end
     it 'participant with 50% of frequency' do
       participants_info = @ruby_course.participants_info
-      participants_info[:participants][@participant_with_50_frequence.name][:time].should == participants_info[:total_time]/2
+      course_total_time = @ruby_course.total_time
+      participants_info.each do |p|
+        if p[0].name == @participant_with_50_frequence.name
+          p[1].should == course_total_time/2
+        end
+      end
     end
   end
 
   describe 'participants_as_javascript_hash' do
     it 'return participants as a hash' do
-      @ruby_course.participants_as_javascript_hash.should == "[{name: 'Ademar da Silva', group: 'Grupo 1', unit: 'Escola da Silva', contact: 'ademar.silva@silva.com.br'},{name: 'Valdemar da Silva', group: 'Grupo 1', unit: 'Escola da Silva', contact: 'valdemar.silva@silva.com.br'},{name: 'Ademar da Silva', group: 'Grupo 1', unit: 'Escola da Silva', contact: 'ademar.silva@silva.com.br'}]"
+      @ruby_course.participants_as_javascript_hash.should == "[{name: 'Ademar da Silva', group: 'Grupo 1', unit: 'Escola da Silva', contact: 'ademar.silva@silva.com.br'},{name: 'Valdemar da Silva', group: 'Grupo 1', unit: 'Escola da Silva', contact: 'valdemar.silva@silva.com.br'}]"
     end
   end
 end

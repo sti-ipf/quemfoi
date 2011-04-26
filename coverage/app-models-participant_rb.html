@@ -28,8 +28,8 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-models-participant_rb.html">app/models/participant.rb</a></td>
-            <td class='right_align'><tt>5</tt></td>
-            <td class='right_align'><tt>3</tt></td>
+            <td class='right_align'><tt>8</tt></td>
+            <td class='right_align'><tt>6</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
             <div class="covered" style="width:100px"></div>
@@ -63,31 +63,49 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line2">2</a>   belongs_to :activity</pre></td>
+            <td><pre><a name="line2">2</a>   belongs_to :course</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line3">3</a>   has_many :certificates</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line4">4</a>   has_many :activities_participants</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line5">5</a>   has_many :activities, :through =&gt; :activities_participants</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line3">3</a> </pre></td>
+            <td><pre><a name="line6">6</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line4">4</a> end</pre></td>
+            <td><pre><a name="line7">7</a> end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line5">5</a> </pre></td>
+            <td><pre><a name="line8">8</a> </pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Fri Apr 22 00:25:55 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
+    <p>Generated on Mon Apr 25 23:52:20 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
 
   </body>
 </html>

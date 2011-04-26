@@ -2,14 +2,18 @@ require 'spec_helper'
 
 describe Participant do
 
-  fixtures :activities, :participants
+  fixtures :activities, :participants, :activities_participants
 
   before(:each) do
-    @ademar = participants(:ademar_activity_one)
+    @ademar = participants(:ademar)
   end
 
-  it 'belongs to a activity' do
-    @ademar.activity.should_not be_nil
+  it 'has many activities' do
+    @ademar.activities.should_not be_nil
+  end
+
+  it 'belongs_to a course' do
+    @ademar.course.should_not be_nil
   end
 
 end

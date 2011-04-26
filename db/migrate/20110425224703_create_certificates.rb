@@ -4,6 +4,7 @@ class CreateCertificates < ActiveRecord::Migration
       t.string :period
       t.integer :total_hours
       t.integer :frequency
+      t.string :file_path
       t.references :participant
       t.references :course
       t.timestamps

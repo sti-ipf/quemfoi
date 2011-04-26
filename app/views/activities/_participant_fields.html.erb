@@ -3,6 +3,7 @@
   <td><%= pf.text_field :group %></td>
   <td><%= pf.text_field :unit %></td>
   <td><%= pf.text_field :contact %></td>
+  <td><%= pf.hidden_field :course_id, :value => @course.id %></td>
 </tr>
 
 <% @i ||= 0 %>

@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe Activity do
 
-  fixtures :activities, :participants, :courses
+  fixtures :activities, :participants, :courses, :activities_participants
 
   before(:each) do
+    @ruby_course = courses(:ruby)
     @ruby_activity = activities(:activity_one)
     @new_activity  = Activity.new(:name => "Brand new activity",
                       :date => Date.tomorrow, :start_time => DateTime.now + 1.day,
@@ -49,8 +50,9 @@ describe Activity do
   it 'rejects participant if his name is blank' do
     activity = Activity.create(:name => "Create Hello World App", :date => Date.tomorrow,
                 :start_time => "Thu, 21 Apr 2011 13:00:00 -0300",
-                :end_time => "Thu, 21 Apr 2011 14:00:00 -0300", :place => "IPF",
-                :participants_attributes => {"0" => {:name => "João"}, "1" => {:name => ""}})
+                :end_time => "Thu, 21 Apr 2011 14:00:00 -0300", :place => "IPF", :course_id => @ruby_course,
+                :participants_attributes =>
+                {"0" => {:name => "João", :course_id => @ruby_course}, "1" => {:name => "", :course_id => @ruby_course}})
     activity.participants.count.should == 1
   end
 

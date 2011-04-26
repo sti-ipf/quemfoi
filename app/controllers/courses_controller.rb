@@ -82,7 +82,11 @@ class CoursesController < ApplicationController
   end
 
   def participants_status
-    @participants = Course.find(params[:id]).participants_info
+    @course = Course.find(params[:id])
+    @participants = @course.participants_info
+    @course_total_time = @course.total_time
+    puts @participants.inspect
+    puts @participants.count
     respond_to do |format|
       format.html
     end

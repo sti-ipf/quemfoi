@@ -86,7 +86,7 @@ describe CoursesController do
   describe 'GET #participants_status' do
     it 'get and render participants_status' do
       get :participants_status, :id => @course.id
-      assigns[:participants][:total_time].should == @course.participants_info[:total_time]
+      assigns[:course_total_time].should == @course.total_time
       response.should render_template("participants_status")
     end
   end

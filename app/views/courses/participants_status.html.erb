@@ -6,11 +6,11 @@
     <th>Frequência</th>
     <th>Aprovado?</th>
   </tr>
-<% @participants[:participants].each do |info| %>
+<% @participants.each do |info| %>
   <tr>
-    <td><%=h info[1][:participant].name %></td>
-    <td><%=h participant_frequency(info[1][:time],@participants[:total_time]) %></td>
-    <td><%= approved(info[1][:time],@participants[:total_time])  %></td>
+    <td><%=h info[0].name %></td>
+    <td><%=h participant_frequency(info[1], @course_total_time) %></td>
+    <td><%= approved(info[1], @course_total_time)  %></td>
   </tr>
 <% end %>
 </table>

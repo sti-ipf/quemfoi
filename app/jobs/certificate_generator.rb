@@ -2,29 +2,23 @@ class CertificateGenerator
   @queue = :certificate_generator
 
   def self.perform(course_id)
-    generate(course_id)
-  end
-
-  def self.generate(course_id)
     @info = Util::Log.new(:prefix=>"CERTIFICATE_GENERATOR")
     @info.log "Iniciando geração dos certificados para o curso com id #{course_id}"
     course = Course.find(course_id)
+    course_total_time = course.total_time
     participants = course.participants_info
-    participants[:participants].each do |info|
-      student = info[1][:participant].name
-      frequency = participants[:total_time] > 0 ? ((info[1][:time]/participants[:total_time].to_f)*100).floor : 0
-      start_date = participants[:start_date]
-      end_date = participants[:end_date]
-      total_hours = participants[:total_time].to_i
+    participants.each do |info|
+      participant = info[0]
+      frequency = course_total_time > 0 ? ((info[1]/course_total_time.to_f)*100).floor : 0
+      file_name = "#{clean_string(course.identifier)}_#{clean_string(participant.name)}.pdf"
       c = Certificate.new(
-        :student => student,
-        :course_identifier => course.identifier,
-        :course_description => course.description,
-        :total_hours => total_hours,
+        :participant => participant,
+        :course => course,
+        :total_hours => course_total_time,
         :frequency => frequency,
-        :period => "#{start_date} à #{end_date}")
-      file_name = "#{clean_string(course.identifier)}_#{clean_string(student)}.pdf"
-      c.save("#{RAILS_ROOT}/public/certificates/#{file_name}")
+        :period => "#{course.start_date.strftime("%d/%m/%Y")} à #{course.end_date.strftime("%d/%m/%Y")}",
+        :file_path => "#{RAILS_ROOT}/public/certificates/#{file_name}")
+      c.save
     end
     @info.log "Finalizada geração dos certificados para o curso com id #{course_id}"
   end

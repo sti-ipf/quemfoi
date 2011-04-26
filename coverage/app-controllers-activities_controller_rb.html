@@ -28,7 +28,7 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-controllers-activities_controller_rb.html">app/controllers/activities_controller.rb</a></td>
-            <td class='right_align'><tt>70</tt></td>
+            <td class='right_align'><tt>71</tt></td>
             <td class='right_align'><tt>52</tt></td>
             <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
@@ -230,254 +230,260 @@
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line30">30</a>     respond_to do |format|</pre></td>
+          <tr class="inferred">
+            <td><pre><a name="line30">30</a> #    @activity.participants.each {|p| p.course_id = @course.id }</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line31">31</a>       if @activity.save</pre></td>
+            <td><pre><a name="line31">31</a>     respond_to do |format|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line32">32</a>         format.html { redirect_to( course_path(params[:course_id]), :notice =&gt; 'Lista de presença salva com sucesso') }</pre></td>
+            <td><pre><a name="line32">32</a>       if @activity.save</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line33">33</a>         format.xml  { render :xml =&gt; @activity, :status =&gt; :created, :location =&gt; @activity }</pre></td>
+            <td><pre><a name="line33">33</a>         format.html { redirect_to( course_path(params[:course_id]), :notice =&gt; 'Lista de presença salva com sucesso') }</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line34">34</a>         format.xml  { render :xml =&gt; @activity, :status =&gt; :created, :location =&gt; @activity }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line34">34</a>       else</pre></td>
+            <td><pre><a name="line35">35</a>       else</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line35">35</a>         80.times { @activity.participants.build }</pre></td>
+            <td><pre><a name="line36">36</a>         80.times { @activity.participants.build }</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line36">36</a>         format.html { render :action =&gt; &quot;new&quot; }</pre></td>
+            <td><pre><a name="line37">37</a>         format.html { render :action =&gt; &quot;new&quot; }</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line37">37</a>         format.xml  { render :xml =&gt; @activity.errors, :status =&gt; :unprocessable_entity }</pre></td>
+            <td><pre><a name="line38">38</a>         format.xml  { render :xml =&gt; @activity.errors, :status =&gt; :unprocessable_entity }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line38">38</a>       end</pre></td>
+            <td><pre><a name="line39">39</a>       end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line39">39</a>     end</pre></td>
+            <td><pre><a name="line40">40</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line40">40</a>   end</pre></td>
+            <td><pre><a name="line41">41</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line41">41</a> </pre></td>
+            <td><pre><a name="line42">42</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line42">42</a>   # PUT /activities/1</pre></td>
+            <td><pre><a name="line43">43</a>   # PUT /activities/1</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line43">43</a>   # PUT /activities/1.xml</pre></td>
+            <td><pre><a name="line44">44</a>   # PUT /activities/1.xml</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line44">44</a>   def update</pre></td>
+            <td><pre><a name="line45">45</a>   def update</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line45">45</a>     @activity = Activity.find(params[:id])</pre></td>
+            <td><pre><a name="line46">46</a>     @activity = Activity.find(params[:id])</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line46">46</a> </pre></td>
+            <td><pre><a name="line47">47</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line47">47</a>     respond_to do |format|</pre></td>
+            <td><pre><a name="line48">48</a>     respond_to do |format|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line48">48</a>       if @activity.update_attributes(params[:activity])</pre></td>
+            <td><pre><a name="line49">49</a>       if @activity.update_attributes(params[:activity])</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line49">49</a>         format.html { redirect_to( course_path(params[:course_id]), :notice =&gt; 'Lista de presença salva com sucesso') }</pre></td>
+            <td><pre><a name="line50">50</a>         format.html { redirect_to( course_path(params[:course_id]), :notice =&gt; 'Lista de presença salva com sucesso') }</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line50">50</a>         format.html { redirect_to(@activity, :notice =&gt; 'activity was successfully updated.') }</pre></td>
+            <td><pre><a name="line51">51</a>         format.html { redirect_to(@activity, :notice =&gt; 'activity was successfully updated.') }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line51">51</a>       else</pre></td>
+            <td><pre><a name="line52">52</a>       else</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line52">52</a>         format.html { render :action =&gt; &quot;edit&quot; }</pre></td>
+            <td><pre><a name="line53">53</a>         format.html { render :action =&gt; &quot;edit&quot; }</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line53">53</a>         format.xml  { render :xml =&gt; @activity.errors, :status =&gt; :unprocessable_entity }</pre></td>
+            <td><pre><a name="line54">54</a>         format.xml  { render :xml =&gt; @activity.errors, :status =&gt; :unprocessable_entity }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line54">54</a>       end</pre></td>
+            <td><pre><a name="line55">55</a>       end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line55">55</a>     end</pre></td>
+            <td><pre><a name="line56">56</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line56">56</a>   end</pre></td>
+            <td><pre><a name="line57">57</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line57">57</a> </pre></td>
+            <td><pre><a name="line58">58</a> </pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line58">58</a>   # DELETE /activities/1</pre></td>
+            <td><pre><a name="line59">59</a>   # DELETE /activities/1</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line59">59</a>   # DELETE /activities/1.xml</pre></td>
+            <td><pre><a name="line60">60</a>   # DELETE /activities/1.xml</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line60">60</a>   def destroy</pre></td>
+            <td><pre><a name="line61">61</a>   def destroy</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line61">61</a>     @activity = Activity.find(params[:id])</pre></td>
+            <td><pre><a name="line62">62</a>     @activity = Activity.find(params[:id])</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line62">62</a>     @activity.destroy</pre></td>
+            <td><pre><a name="line63">63</a>     @activity.destroy</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line63">63</a> </pre></td>
+            <td><pre><a name="line64">64</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line64">64</a>     respond_to do |format|</pre></td>
+            <td><pre><a name="line65">65</a>     respond_to do |format|</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line65">65</a>       format.html { redirect_to(course_path(params[:course_id])) }</pre></td>
+            <td><pre><a name="line66">66</a>       format.html { redirect_to(course_path(params[:course_id])) }</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line66">66</a>       format.xml  { head :ok }</pre></td>
+            <td><pre><a name="line67">67</a>       format.xml  { head :ok }</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line67">67</a>     end</pre></td>
+            <td><pre><a name="line68">68</a>     end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line68">68</a>   end</pre></td>
+            <td><pre><a name="line69">69</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line69">69</a> end</pre></td>
+            <td><pre><a name="line70">70</a> end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line70">70</a> </pre></td>
+            <td><pre><a name="line71">71</a> </pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Fri Apr 22 00:25:54 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
+    <p>Generated on Mon Apr 25 23:52:20 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
 
   </body>
 </html>

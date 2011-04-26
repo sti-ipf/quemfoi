@@ -17,7 +17,7 @@ Course.all.each do |c|
         participants << p.name
         file.puts "
           participant = Participant.create(:name => '#{p.name}', :group => '#{p.group}', :unit => '#{p.unit}',
-            :contact => '#{p.contact}')
+            :contact => '#{p.contact}', :course => course)
         "
       else
         file.puts "participant = Participant.find_by_name('#{p.name}')"
