@@ -18,8 +18,9 @@ describe Certificate do
       :frequency => 80,
       :period => "18 à 21 de março de 2011",
       :file_path => file_path)
-    c.save
+    c.save_file
     File.exist?(file_path).should be_true
+    c.save.should be_true
   end
 
 end

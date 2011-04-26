@@ -1,0 +1,58 @@
+<%= render :partial => "search_bar", :locals => {:participants => @participants} %>
+
+<% @certificates.each do |c|%>
+  <div>
+    <%= c.course.identifier %>
+    <%= c.course.description %>
+    <%= c.period %>
+    <%= c.total_hours %>
+    <%= c.frequency %>
+  </div>
+  <div>
+    <p>Os dados estão corretos?</p>
+    <%= check_box_tag 'certificicate_correct' %> Sim
+    <%= check_box_tag 'certificicate_incorrect'%> Não
+  </div>
+<% end%>
+<script>
+  $('#certificicate_correct').change(function() {
+    checked = $('#certificicate_correct').is(':checked');
+    if (checked == true) {
+      $('#certificicate_incorrect').attr('checked', false);
+      $("#email_to_support").hide();
+      $("#email_with_certificate").show();
+    }
+    else{
+      $("#email_with_certificate").hide();
+    }
+  });
+
+  $('#certificicate_incorrect').change(function() {
+    checked = $('#certificicate_incorrect').is(':checked');
+    if (checked == true) {
+      $('#certificicate_correct').attr('checked', false);
+      $("#email_to_support").show();
+      $("#email_with_certificate").hide();
+    }
+    else{
+      $("#email_to_support").hide();
+    }
+  });
+</script>
+
+<div id="email_with_certificate">
+ <% form_tag certificate_send_to_participant_path do %>
+   <%= text_field_tag :email, '', :size => 20 %>
+   <%= hidden_field_tag :participant_id, @participant.id %>
+   <%= submit_tag t('send'), :disable_with => t('please_wait')%>
+ <% end %>
+</div>
+
+<div id="email_to_support">
+ <% form_tag certificate_send_to_support_path do %>
+   <%= text_field_tag :email, '', :size => 20 %>
+   <%= hidden_field_tag :participant_id, @participant.id %>
+   <%= submit_tag t('send'), :disable_with => t('please_wait')%>
+ <% end %>
+</div>
+

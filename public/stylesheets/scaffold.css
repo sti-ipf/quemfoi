@@ -54,3 +54,7 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+#email_to_support{display: none;}
+#email_with_certificate{display: none;}
+

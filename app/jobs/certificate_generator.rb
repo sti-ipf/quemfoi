@@ -19,6 +19,7 @@ class CertificateGenerator
         :period => "#{course.start_date.strftime("%d/%m/%Y")} à #{course.end_date.strftime("%d/%m/%Y")}",
         :file_path => "#{RAILS_ROOT}/public/certificates/#{file_name}")
       c.save
+      c.save_file
     end
     @info.log "Finalizada geração dos certificados para o curso com id #{course_id}"
   end

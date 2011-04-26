@@ -14,7 +14,10 @@ Quemfoi::Application.routes.draw do
   #   resources :products
   mount Resque::Server.new, :at => "/resque"
 
-
+  match 'certificates/search' => 'certificates#search', :as => :certificates_search
+  match 'certificates/send_to_participant' => 'certificates#send_to_participant', :as => :certificate_send_to_participant
+  match 'certificates/send_to_support' => 'certificates#send_to_support', :as => :certificate_send_to_support
+  resources :certificates, :only => [ :index]
   resources :courses  do
     resources :activities, :except => [ :index, :show ]
     member do

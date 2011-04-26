@@ -2,7 +2,7 @@ class Certificate < ActiveRecord::Base
   belongs_to :participant
   belongs_to :course
 
-  def save
+  def save_file
     create_pdf_file
     fill_with_data
     @pdf_file.render_file(file_path)
