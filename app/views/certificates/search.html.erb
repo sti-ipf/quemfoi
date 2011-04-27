@@ -13,50 +13,55 @@
     <%= check_box_tag 'certificicate_correct' %> Sim
     <%= check_box_tag 'certificicate_incorrect'%> Não
   </div>
+
+  <div id="email_with_certificate">
+    Informe o seu e-mail para receber o certificado:
+    <% form_tag certificate_send_email_path do %>
+     <%= text_field_tag :email, '', :size => 20 %>
+     <%= hidden_field_tag :certificate_id, c.id %>
+     <%= hidden_field_tag :participant_id, @participant.id %>
+     <%= hidden_field_tag :to_support, false %>
+     <%= submit_tag t('send'), :disable_with => t('please_wait')%>
+    <% end %>
+  </div>
+
+  <div id="email_to_support">
+    Informe o seu e-mail para que possamos entrar em contato a respeito da correção do certificado:
+    <% form_tag certificate_send_email_path do %>
+     <%= text_field_tag :email, '', :size => 20 %>
+     <%= hidden_field_tag :certificate_id, c.id %>
+     <%= hidden_field_tag :participant_id, @participant.id %>
+     <%= hidden_field_tag :to_support, true %>
+     <%= submit_tag t('send'), :disable_with => t('please_wait')%>
+    <% end %>
+  </div>
+
+  <script>
+    $('#certificicate_correct').change(function() {
+      checked = $('#certificicate_correct').is(':checked');
+      if (checked == true) {
+        $('#certificicate_incorrect').attr('checked', false);
+        $("#email_to_support").hide();
+        $("#email_with_certificate").show();
+      }
+      else{
+        $("#email_with_certificate").hide();
+      }
+    });
+
+    $('#certificicate_incorrect').change(function() {
+      checked = $('#certificicate_incorrect').is(':checked');
+      if (checked == true) {
+        $('#certificicate_correct').attr('checked', false);
+        $("#email_to_support").show();
+        $("#email_with_certificate").hide();
+      }
+      else{
+        $("#email_to_support").hide();
+      }
+    });
+  </script>
+
+
 <% end%>
-<script>
-  $('#certificicate_correct').change(function() {
-    checked = $('#certificicate_correct').is(':checked');
-    if (checked == true) {
-      $('#certificicate_incorrect').attr('checked', false);
-      $("#email_to_support").hide();
-      $("#email_with_certificate").show();
-    }
-    else{
-      $("#email_with_certificate").hide();
-    }
-  });
-
-  $('#certificicate_incorrect').change(function() {
-    checked = $('#certificicate_incorrect').is(':checked');
-    if (checked == true) {
-      $('#certificicate_correct').attr('checked', false);
-      $("#email_to_support").show();
-      $("#email_with_certificate").hide();
-    }
-    else{
-      $("#email_to_support").hide();
-    }
-  });
-</script>
-
-<div id="email_with_certificate">
-  Informe o seu e-mail para receber o certificado:
-  <% form_tag certificate_send_email_path do %>
-   <%= text_field_tag :email, '', :size => 20 %>
-   <%= hidden_field_tag :participant_id, @participant.id %>
-   <%= hidden_field_tag :to_support, false %>
-   <%= submit_tag t('send'), :disable_with => t('please_wait')%>
-  <% end %>
-</div>
-
-<div id="email_to_support">
-  Informe o seu e-mail para que póssamos entrar em contato a respeito da correção do certificado:
-  <% form_tag certificate_send_email_path do %>
-   <%= text_field_tag :email, '', :size => 20 %>
-   <%= hidden_field_tag :participant_id, @participant.id %>
-   <%= hidden_field_tag :to_support, true %>
-   <%= submit_tag t('send'), :disable_with => t('please_wait')%>
-  <% end %>
-</div>
 

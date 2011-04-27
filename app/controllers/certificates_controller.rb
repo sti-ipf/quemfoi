@@ -16,7 +16,9 @@ class CertificatesController < ApplicationController
     participant.save
     @to_support = params[:to_support]
     if @to_support
+      Resque.enqueue(CertificateSender,params[:certificate_id], 'ffc.fabricio@gmail.com')
     else
+      Resque.enqueue(CertificateSender,params[:certificate_id], params[:email])
     end
   end
 

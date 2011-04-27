@@ -40,6 +40,18 @@ module Quemfoi
     config.filter_parameters += [:password]
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.autoload_paths += Dir["#{config.root}/app/jobs/**/"]
+    config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      :enable_starttls_auto => true,
+      :tls => true,
+      :address => "smtp.gmail.com",
+      :port => "587",
+      :domain => "snote.heroku.com",
+      :authentication => :plain,
+      :user_name => "snoteapp@gmail.com",
+      :password => "notesmadeeasy"
+    }
   end
 end
 
