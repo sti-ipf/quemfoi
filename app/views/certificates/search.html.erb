@@ -10,11 +10,11 @@
   </div>
   <div>
     <p>Os dados estão corretos?</p>
-    <%= check_box_tag 'certificicate_correct' %> Sim
-    <%= check_box_tag 'certificicate_incorrect'%> Não
+    <%= check_box_tag "certificicate_correct_#{c.id}" %> Sim
+    <%= check_box_tag "certificicate_incorrect_#{c.id}" %> Não
   </div>
 
-  <div id="email_with_certificate">
+  <div id="email_with_certificate_<%= c.id %>" style="display:none">
     Informe o seu e-mail para receber o certificado:
     <% form_tag certificate_send_email_path do %>
      <%= text_field_tag :email, '', :size => 20 %>
@@ -25,7 +25,7 @@
     <% end %>
   </div>
 
-  <div id="email_to_support">
+  <div id="email_to_support_<%= c.id %>" style="display:none">
     Informe o seu e-mail para que possamos entrar em contato a respeito da correção do certificado:
     <% form_tag certificate_send_email_path do %>
      <%= text_field_tag :email, '', :size => 20 %>
@@ -37,27 +37,27 @@
   </div>
 
   <script>
-    $('#certificicate_correct').change(function() {
-      checked = $('#certificicate_correct').is(':checked');
+    $('#certificicate_correct_<%= c.id %>').change(function() {
+      checked = $('#certificicate_correct_<%= c.id %>').is(':checked');
       if (checked == true) {
-        $('#certificicate_incorrect').attr('checked', false);
-        $("#email_to_support").hide();
-        $("#email_with_certificate").show();
+        $('#certificicate_incorrect_<%= c.id %>').attr('checked', false);
+        $("#email_to_support_<%= c.id %>").hide();
+        $("#email_with_certificate_<%= c.id %>").show();
       }
       else{
-        $("#email_with_certificate").hide();
+        $("#email_with_certificate_<%= c.id %>").hide();
       }
     });
 
-    $('#certificicate_incorrect').change(function() {
-      checked = $('#certificicate_incorrect').is(':checked');
+    $('#certificicate_incorrect_<%= c.id %>').change(function() {
+      checked = $('#certificicate_incorrect_<%= c.id %>').is(':checked');
       if (checked == true) {
-        $('#certificicate_correct').attr('checked', false);
-        $("#email_to_support").show();
-        $("#email_with_certificate").hide();
+        $('#certificicate_correct_<%= c.id %>').attr('checked', false);
+        $("#email_to_support_<%= c.id %>").show();
+        $("#email_with_certificate_<%= c.id %>").hide();
       }
       else{
-        $("#email_to_support").hide();
+        $("#email_to_support_<%= c.id %>").hide();
       }
     });
   </script>
