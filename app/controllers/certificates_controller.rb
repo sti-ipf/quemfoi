@@ -6,7 +6,7 @@ class CertificatesController < ApplicationController
   def search
     @participants = Participant.get_names
     @participant = Participant.find_by_name(params[:search])
-    @certificates = @participant.certificates
+    @certificates = @participant.certificates if !@participant.nil?
     render :layout => false if request.xhr?
   end
 
