@@ -4,8 +4,10 @@ class ChangeDataTypeForActivitiesStartTimeAndEndTime < ActiveRecord::Migration
 #      t.change :start_time, :datetime
 #      t.change :end_time, :datetime
 #    end
-    execute("ALTER TABLE activities ALTER COLUMN start_time TYPE TIMESTAMP USING CAST (start_time AS timestamp)")
-    execute("ALTER TABLE activities ALTER COLUMN end_time TYPE TIMESTAMP USING CAST (end_time AS timestamp)")
+  execute("ALTER TABLE activities DROP COLUMN start_time;")
+  execute("ALTER TABLE activities ADD COLUMN start_time timestamp;")
+  execute("ALTER TABLE activities DROP COLUMN end_time;")
+  execute("ALTER TABLE activities ADD COLUMN end_time timestamp;")
   end
 
   def self.down
