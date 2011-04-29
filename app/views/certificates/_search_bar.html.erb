@@ -8,7 +8,7 @@
 <script>
   $(document).ready(function(){
     var data = <%=array_or_string_for_javascript(participants)%>;
-    $( "#search" ).autocomplete(data);
+    $( "#search" ).autocomplete(data, {max:10});
     $("#search_submit").attr("disabled","disabled");
     $("#search").keyup(function() {
       var $submit = $("#search_submit");

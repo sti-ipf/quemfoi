@@ -5,7 +5,7 @@ class Participant < ActiveRecord::Base
   has_many :activities, :through => :activities_participants
 
   def self.get_names
-    Participant.all(:select => 'name', :group => 'name').collect {|p| p.name}
+    Participant.all(:select => 'name', :group => 'name').collect {|p| p.name.gsub("'","")}
   end
 
 end
