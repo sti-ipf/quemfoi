@@ -17,6 +17,8 @@ Quemfoi::Application.routes.draw do
   match 'certificates/search' => 'certificates#search', :as => :certificates_search
   match 'certificates/send_email' => 'certificates#send_email', :as => :certificate_send_email
   resources :certificates, :only => [ :index]
+  root :to => 'certificates#index'
+#  root :to => 'courses#index'
 #  resources :courses  do
 #    resources :activities, :except => [ :index, :show ]
 #    member do
@@ -60,8 +62,6 @@ Quemfoi::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
-
-  root :to => 'courses#index'
 
   # See how all your routes lay out with "rake routes"
 
