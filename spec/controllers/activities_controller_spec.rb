@@ -5,7 +5,7 @@ describe ActivitiesController do
   fixtures :activities, :participants, :courses, :activities_participants
 
   before(:each) do
-    @course = Course.first
+    @course = Course.find_by_identifier('ruby01')
     @course_activity = @course.activities.first
     @participants = @course_activity.participants
     @new_activity_hash  = {'name' => "Brand new activity", 'course_id' => @course.id,

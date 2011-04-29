@@ -7,4 +7,10 @@ two:
 three:
   participant: valdemar
   activity: activity_one
+four:
+  participant: ademar_rails
+  activity: rails_activity_one
+five:
+  participant: ademar_rails
+  activity: rails_activity_two
 

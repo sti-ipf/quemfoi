@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
   <head>
-    <title>app/models/participant.rb</title>
+    <title>app/jobs/certificate_sender.rb</title>
     <link href="screen.css" media="all" rel="stylesheet" type="text/css" />
     <link href="print.css" media="print" rel="stylesheet" type="text/css" />
     
@@ -10,7 +10,7 @@
   </head>
   <body>
     <h1>Quemfoi C0 Coverage Information - RCov</h1>
-    <h2>app/models/participant.rb</h2>
+    <h2>app/jobs/certificate_sender.rb</h2>
 
     
 
@@ -27,18 +27,18 @@
         </thead>
         <tbody>
           <tr>
-            <td class="left_align"><a href="app-models-participant_rb.html">app/models/participant.rb</a></td>
-            <td class='right_align'><tt>12</tt></td>
+            <td class="left_align"><a href="app-jobs-certificate_sender_rb.html">app/jobs/certificate_sender.rb</a></td>
+            <td class='right_align'><tt>11</tt></td>
             <td class='right_align'><tt>9</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>45.45%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:100px"></div>
-            <div class="uncovered" style="width:0px"></div>
+            <div class="covered" style="width:45px"></div>
+            <div class="uncovered" style="width:55px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>33.33%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:100px"></div>
-            <div class="uncovered" style="width:0px"></div>
+            <div class="covered" style="width:33px"></div>
+            <div class="uncovered" style="width:67px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -57,73 +57,67 @@
           
           
           <tr class="marked">
-            <td><pre><a name="line1">1</a> class Participant &lt; ActiveRecord::Base</pre></td>
+            <td><pre><a name="line1">1</a> class CertificateSender</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line2">2</a>   belongs_to :course</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line3">3</a>   has_many :certificates</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line4">4</a>   has_many :activities_participants</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line5">5</a>   has_many :activities, :through =&gt; :activities_participants</pre></td>
+            <td><pre><a name="line2">2</a>   @queue = :certificate_sender</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line6">6</a> </pre></td>
+            <td><pre><a name="line3">3</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line7">7</a>   def self.get_names</pre></td>
+            <td><pre><a name="line4">4</a>   def self.perform(certificate_id, to, to_support)</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line8">8</a>     Participant.all(:select =&gt; 'name', :group =&gt; 'name').collect {|p| p.name}</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line5">5</a>     @info = Util::Log.new(:prefix=&gt;&quot;CERTIFICATE_SENDER&quot;)</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
+          <tr class="uncovered">
+            <td><pre><a name="line6">6</a>     @info.log &quot;Iniciando envio do certificado com o id #{certificate_id}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line7">7</a>     Notification.deliver_notificate(certificate_id, to, to_support)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line8">8</a>     @info.log &quot;Finalizado envio do certificado com o id #{certificate_id}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
             <td><pre><a name="line9">9</a>   end</pre></td>
           </tr>
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line10">10</a> </pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line10">10</a> end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line11">11</a> end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line12">12</a> </pre></td>
+            <td><pre><a name="line11">11</a> </pre></td>
           </tr>
         
       </tbody>

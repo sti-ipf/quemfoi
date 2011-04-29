@@ -16,5 +16,11 @@ describe Participant do
     @ademar.course.should_not be_nil
   end
 
+  describe 'get_names' do
+    it 'return all participants names, only one name per participant' do
+      Participant.get_names.count.should  eq 2
+    end
+  end
+
 end
 

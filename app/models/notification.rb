@@ -1,7 +1,7 @@
-class Notifications < ActionMailer::Base
+class Notification < ActionMailer::Base
   include Resque::Mailer
 
-  def notification(certificate_id, to, to_support)
+  def notificate(certificate_id, to, to_support)
     certificate = Certificate.find(certificate_id)
     participant = certificate.participant
     course = certificate.course

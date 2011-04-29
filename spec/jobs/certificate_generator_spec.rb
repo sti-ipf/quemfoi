@@ -10,13 +10,13 @@ describe CertificateGenerator do
 
   def get_total_of_participants
     total_participants = 0
-    Course.all.each do |c|
-      max_total = 0
-      c.activities.each do |a|
-        max_total = a.participants.count if a.participants.count > max_total
-      end
-      total_participants += max_total
+    c = Course.find_by_identifier('ruby01')
+    max_total = 0
+    c.activities.each do |a|
+      max_total = a.participants.count if a.participants.count > max_total
     end
+    total_participants += max_total
+
     total_participants
   end
 
@@ -25,9 +25,7 @@ describe CertificateGenerator do
   end
 
   it 'generate all certificates' do
-    Course.all.each do |course|
-      CertificateGenerator.perform(course.id)
-    end
+    CertificateGenerator.perform(Course.find_by_identifier('ruby01').id)
     total_files = Dir['public/certificates/*.pdf'].count
     total_participants = get_total_of_participants
     total_files.should eq(total_participants)

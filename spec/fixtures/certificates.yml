@@ -1,0 +1,8 @@
+ademar_certificate:
+  participant: ademar
+  course: ruby
+  total_hours: 2
+  frequency: 100
+  period: "02/01/2011 à 04/01/2011"
+  file_path: "/tmp/test.txt"
+

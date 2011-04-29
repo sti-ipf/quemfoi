@@ -14,4 +14,20 @@ activity_two:
   start_time: <%= DateTime.now - 1.hour %>
   end_time: <%= DateTime.now %>
   course: ruby
+rails_activity_one:
+  name: "Hello World"
+  date: <%= DateTime.now %>
+  place: "IPF"
+  leader: "Fulano da Silva"
+  start_time: <%= DateTime.now - 1.hour %>
+  end_time: <%= DateTime.now %>
+  course: rails
+rails_activity_two:
+  name: "Scaffold"
+  date: <%= DateTime.now %>
+  place: "IPF"
+  leader: "Fulano da Silva"
+  start_time: <%= DateTime.now - 1.hour %>
+  end_time: <%= DateTime.now %>
+  course: rails
 

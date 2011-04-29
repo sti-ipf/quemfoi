@@ -11,9 +11,9 @@ class CertificatesController < ApplicationController
   end
 
   def send_email
-    participant = Participant.find(params[:participant_id])
-    participant.contact = params[:email]
-    participant.save
+    @participant = Participant.find(params[:participant_id])
+    @participant.contact = params[:email]
+    @participant.save
     @to_support = params[:to_support]
     if @to_support
       Resque.enqueue(CertificateSender,params[:certificate_id], 'ffc.fabricio@gmail.com', @to_support)

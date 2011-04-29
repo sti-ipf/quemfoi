@@ -4,7 +4,7 @@ class CertificateSender
   def self.perform(certificate_id, to, to_support)
     @info = Util::Log.new(:prefix=>"CERTIFICATE_SENDER")
     @info.log "Iniciando envio do certificado com o id #{certificate_id}"
-    Notifications.deliver_notification(certificate_id, to, to_support)
+    Notification.deliver_notificate(certificate_id, to, to_support)
     @info.log "Finalizado envio do certificado com o id #{certificate_id}"
   end
 end

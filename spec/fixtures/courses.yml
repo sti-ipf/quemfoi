@@ -1,4 +1,7 @@
 ruby:
   identifier: "ruby01"
   description: "Ruby language course"
+rails:
+  identifier: "rails01"
+  description: "Rails course"
 
