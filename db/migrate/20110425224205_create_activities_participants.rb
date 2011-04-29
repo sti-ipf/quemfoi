@@ -5,7 +5,7 @@ class CreateActivitiesParticipants < ActiveRecord::Migration
       t.references :participant, :null => false
       t.timestamps
     end
-    add_index :activities_participants, [:activity_id, :participant_id], :unique => true
+    add_index :activities_participants, [:activity_id, :participant_id]
   end
 
   def self.down

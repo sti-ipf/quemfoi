@@ -1,4 +1,5 @@
 class Activity < ActiveRecord::Base
+  has_many :participants, :through =>
   has_many :activities_participants
   has_many :participants, :through => :activities_participants
   belongs_to :course

@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20110426010640) do
     t.datetime "updated_at"
   end
 
-  add_index "activities_participants", ["activity_id", "participant_id"], :name => "index_activities_participants_on_activity_id_and_participant_id", :unique => true
+  add_index "activities_participants", ["activity_id", "participant_id"], :name => "index_activities_participants_on_activity_id_and_participant_id"
 
   create_table "certificates", :force => true do |t|
     t.string   "period"
