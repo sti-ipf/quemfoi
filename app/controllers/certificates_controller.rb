@@ -3,6 +3,8 @@ class CertificatesController < ApplicationController
   layout 'certicate'
 
   def index
+    a = []
+    10000.times{|i| a << "#{i}aáa"}
     @participants = Participant.get_names
   end
 
