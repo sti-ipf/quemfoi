@@ -1,4 +1,7 @@
 class CertificatesController < ApplicationController
+
+  layout 'certicate'
+
   def index
     @participants = Participant.get_names
   end
