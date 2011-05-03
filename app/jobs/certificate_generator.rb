@@ -7,6 +7,7 @@ class CertificateGenerator
     course = Course.find(course_id)
     course_total_time = course.total_time
     participants = course.participants_info
+    Dir.mkdir("#{RAILS_ROOT}/public/certificates/#{course_id}")
     participants.each do |info|
       participant = info[0]
       frequency = course_total_time > 0 ? ((info[1]/course_total_time.to_f)*100).floor : 0
@@ -17,7 +18,7 @@ class CertificateGenerator
         :total_hours => course_total_time,
         :frequency => frequency,
         :period => "#{course.start_date.strftime("%d/%m/%Y")} à #{course.end_date.strftime("%d/%m/%Y")}",
-        :file_path => "#{RAILS_ROOT}/public/certificates/#{file_name}")
+        :file_path => "#{RAILS_ROOT}/public/certificates/#{course_id}/#{file_name}")
       c.save
       c.save_file
     end

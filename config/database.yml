@@ -1,6 +1,6 @@
 development:
   adapter: mysql
-  encoding: utf8
+  encoding: latin1
   reconnect: false
   database: quemfoi_development
   pool: 5
