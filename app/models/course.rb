@@ -4,6 +4,8 @@ class Course < ActiveRecord::Base
   has_many :certificates
 
   validates_presence_of :identifier
+  
+  scope :certificates_not_generated, where(:certificates_generated => false) 
 
   def total_time
     total_time = 0

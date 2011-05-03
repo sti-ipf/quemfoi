@@ -10,6 +10,7 @@ class CertificateGenerator
     Dir.mkdir("#{RAILS_ROOT}/public/certificates/#{course_id}")
     participants.each do |info|
       participant = info[0]
+      next if participant.certificates.count > 0
       frequency = course_total_time > 0 ? ((info[1]/course_total_time.to_f)*100).floor : 0
       file_name = "#{course_id}_#{clean_string(participant.name)}.pdf"
       c = Certificate.new(
@@ -22,6 +23,8 @@ class CertificateGenerator
       c.save
       c.save_file
     end
+    course.certificates_generated = true
+    course.save
     @info.log "Finalizada geração dos certificados para o curso com id #{course_id}"
   end
 
