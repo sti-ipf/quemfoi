@@ -1,3 +1,5 @@
+db/data_from_old_schema.rb
+db/production_data.rb
 data/*
 config/database.yml
 db/schema.rb

@@ -1,7 +1,9 @@
+# -*- encoding : utf-8 -*-
 require 'rubygems'
 require File.dirname(__FILE__)+'/../config/application'
 require File.dirname(__FILE__)+'/../config/environment'
-file = File.new("#{File.dirname(__FILE__)}/../db/data_from_old_schema.rb", "w+")
+
+file = File.new("#{File.dirname(__FILE__)}/../db/data_from_old_schema.latin1", "w+")
 participants = []
 
 def clean_string(s)
@@ -20,7 +22,7 @@ Course.all.each do |c|
     a.leader = clean_string(a.leader)
     file.puts "
       activity = Activity.create(:name => \"#{a.name}\", :date => \"#{a.date}\", :place => \"#{a.place}\",
-        :leader => \"#{a.leader}\", :start_time => \"#{a.start_time}\", :end_time => \"#{a.end_time}\", :course => course)
+        :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date} #{a.start_time}\", \"%Y/%m/%d %H:%M:%S\"), :end_time => DateTime.strptime(\"#{a.date} #{a.end_time}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)
     "
     a.participants.each do |p|
       p.name = clean_string(p.name)
