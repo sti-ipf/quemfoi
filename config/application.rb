@@ -47,10 +47,10 @@ module Quemfoi
       :tls => true,
       :address => "smtp.gmail.com",
       :port => "587",
-      :domain => "snote.heroku.com",
+      :domain => "paulofreire.org",
       :authentication => :plain,
-      :user_name => "snoteapp@gmail.com",
-      :password => "notesmadeeasy"
+      :user_name => "ipf.certificados@gmail.com",
+      :password => "certificados11"
     }
   end
 end
