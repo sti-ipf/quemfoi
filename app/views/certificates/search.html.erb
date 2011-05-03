@@ -1,6 +1,6 @@
 <%= render :partial => "search_bar", :locals => {:participants => @participants} %>
 <div id="certificates_data">
-  <% if !@certificates.nil? %>
+  <% if @certificates.count > 0%>
     <% @certificates.each do |c|%>
       <div class="certificate_data">
         <div>

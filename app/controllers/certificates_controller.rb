@@ -11,7 +11,11 @@ class CertificatesController < ApplicationController
   def search
     @participants = Participant.get_names
     @participant = Participant.find_by_name(params[:search])
-    @certificates = @participant.certificates if !@participant.nil?
+    if @participant.nil?
+      @certificates = []
+    else
+      @certificates = @participant.certificates 
+    end
     render :layout => false if request.xhr?
   end
 
