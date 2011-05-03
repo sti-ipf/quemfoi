@@ -11,7 +11,7 @@ class CertificateGenerator
     participants.each do |info|
       participant = info[0]
       frequency = course_total_time > 0 ? ((info[1]/course_total_time.to_f)*100).floor : 0
-      file_name = "#{clean_string(course.identifier)}_#{clean_string(participant.name)}.pdf"
+      file_name = "#{course_id}_#{clean_string(participant.name)}.pdf"
       c = Certificate.new(
         :participant => participant,
         :course => course,
