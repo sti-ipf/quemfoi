@@ -4,10 +4,9 @@ require File.dirname(__FILE__)+'/../config/application'
 require File.dirname(__FILE__)+'/../config/environment'
 
 file = File.new("#{File.dirname(__FILE__)}/../db/data_from_old_schema.latin1", "w+")
-participants = []
 
 def clean_string(s)
-  s.gsub("\"","'")
+  s.gsub("\"","'").remover_acentos
 end
 
 Course.all.each do |c|
@@ -16,6 +15,7 @@ Course.all.each do |c|
   file.puts "
     course = Course.create(:identifier => \"#{c.identifier}\", :description => \"#{c.description}\")
   "
+  participants = []
   c.activities.each do |a|
     a.name = clean_string(a.name)
     a.place = clean_string(a.place)

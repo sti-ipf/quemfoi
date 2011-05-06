@@ -7,7 +7,8 @@ class CertificateGenerator
     course = Course.find(course_id)
     course_total_time = course.total_time
     participants = course.participants_info
-    Dir.mkdir("#{RAILS_ROOT}/public/certificates/#{course_id}")
+    directory = "#{RAILS_ROOT}/public/certificates/#{course_id}"
+    Dir.mkdir(directory) if !File.directory?(directory)
     participants.each do |info|
       participant = info[0]
       next if participant.certificates.count > 0
