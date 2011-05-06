@@ -1,5 +1,6 @@
 db/data_from_old_schema.rb
 db/production_data.rb
+public/certificates/*
 data/*
 config/database.yml
 db/schema.rb

@@ -17,6 +17,7 @@ gem 'sinatra'
 gem 'whenever'
 gem 'brstring'
 gem 'json'
+gem 'levenshtein'
 
 group :development, :test do
   gem 'rspec-rails'

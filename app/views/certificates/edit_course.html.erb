@@ -1,0 +1,14 @@
+<div id="search_bar">
+  <% form_tag certificates_search_path, :id => 'search_form' do %>
+    <%= text_field_tag :search, '', :size => 20 %>
+    <%= submit_tag t('search'), :disable_with => t('please_wait_searching'), :id => 'search_submit' %>
+  <% end %>
+</div>
+
+<script>
+  $(document).ready(function(){
+    var data = <%=array_or_string_for_javascript(@participants)%>;
+    $( "#search" ).autocomplete(data, {max:10});
+  });
+</script>
+

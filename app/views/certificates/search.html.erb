@@ -16,7 +16,7 @@
           <b>Total de horas:</b>&nbsp;<%= c.total_hours %>
         </div>
         <div>
-          <b>Frequência:</b>&nbsp;<%= c.frequency %>
+          <b>Frequência:</b>&nbsp;<%= c.frequency %>%
         </div>
       </div>
 
@@ -73,6 +73,10 @@
         });
       </script>
     <% end %>
+    <div class="course_list">
+      Editar Curso
+      <li> <%= link_to @course.identifier, certificate_edit_course_path(@course.id)%> </li>
+    <div>
   <% else %>
     Não há certificados para o aluno informado.
   <% end %>
