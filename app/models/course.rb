@@ -4,8 +4,8 @@ class Course < ActiveRecord::Base
   has_many :certificates
 
   validates_presence_of :identifier
-  
-  scope :certificates_not_generated, where(:certificates_generated => false) 
+
+  scope :certificates_not_generated, where(:certificates_generated => false)
 
   def total_time
     total_time = 0
@@ -34,11 +34,7 @@ class Course < ActiveRecord::Base
   def participants_info
     info_about_participants = []
     participants.each do |p|
-      participant_total_time = 0
-      p.activities.each do |a|
-        participant_total_time += a.duration
-      end
-      info_about_participants << [p, participant_total_time]
+      info_about_participants << [p, p.total_time]
     end
     info_about_participants
   end
