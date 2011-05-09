@@ -40,10 +40,12 @@ private
     course_total_time = course.total_time
     frequency = calc_frequency(participant.total_time, course_total_time)
     file_name = "#{course.id}_#{clean_string(participant.name)}.pdf"
-    create_certificate_for_participant(:participant => participant, :course => course,
+    certificate = create_certificate_for_participant(:participant => participant, :course => course,
       :course_total_time => course_total_time, :frequency => frequency, :file_name => file_name)
     info.log "Finalizada geração do certificado para o participante com id #{participant.id}"
     info.log "O certificado foi gerado em: #{RAILS_ROOT}/public/certificates/#{course.id}/#{file_name}"
+    puts is_email?(participant.contact)
+    Resque.enqueue(CertificateSender,certificate.id, 'ffc.fabricio@gmail.com', false) if is_email?('ffc.fabricio@gmail.com')
   end
 
   def self.create_certificate_for_participant(params={})
@@ -56,6 +58,7 @@ private
       :file_path => "#{RAILS_ROOT}/public/certificates/#{params[:course].id}/#{params[:file_name]}")
     c.save
     c.save_file
+    c
   end
 
   def self.calc_frequency(participant_total_time, course_total_time)
@@ -65,6 +68,10 @@ private
 
   def self.clean_string(string)
     string.remover_acentos.downcase.gsub(' ', '_')
+  end
+
+  def self.is_email?(string)
+    !(string.match(/^([^@s]+)@((?:[-a-z0-9]+.)+[a-z]{2,})$/i)).nil?
   end
 end
 
