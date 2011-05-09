@@ -116,3 +116,20 @@ img#header{ float: left;}
   margin-top: 15px;
 }
 
+#ListBoxAllItems{
+  height: 400px !important;
+  overflow: auto;
+}
+
+#ListBoxAllItems, #ListBoxSelectedItems, #ListBoxCorrectItem{
+  list-style: none outside none;
+}
+
+#ListBoxSelectedItems, #ListBoxCorrectItem{
+    margin-left: 20px;
+    margin-top: 160px;
+    position: fixed !important;
+    top: 0;
+    width: 300px;
+}
+
