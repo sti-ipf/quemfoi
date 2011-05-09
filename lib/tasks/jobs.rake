@@ -6,7 +6,7 @@ namespace :jobs do
 
   task :certificate_generator do
     Course.certificates_not_generated.each do |course|
-      Resque.enqueue(CertificateGenerator, course.id)
+      Resque.enqueue(CertificateGenerator, CertificateGenerator::FOR_COURSE, course.id)
     end
   end
 

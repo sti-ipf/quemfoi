@@ -41,7 +41,8 @@ class CertificatesController < ApplicationController
   end
 
   def update_course
-    Participant.update_incorrect_participants(params)
+    correct_participant = Participant.update_incorrect_participants(params)
+    Resque.enqueue(CertificateGenerator, CertificateGenerator::FOR_PARTICIPANT, correct_participant.id)
     flash[:notice] = "Dados atualizados com sucesso"
     respond_to do |format|
       format.js if request.xhr?

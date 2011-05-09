@@ -24,9 +24,20 @@ class Participant < ActiveRecord::Base
     ")
     correct_participant = Participant.first(:conditions => "course_id = #{course_id} AND name = '#{correct_name}'")
     incorrect_participants.each do |p|
-      ActiveRecord::Base.connection.execute("UPDATE activities_participants set participant_id = #{correct_participant.id} WHERE participant_id = #{p.id}")
-      p.destroy
+      if p.name != correct_participant.name
+        ActiveRecord::Base.connection.execute("UPDATE activities_participants set participant_id = #{correct_participant.id} WHERE participant_id = #{p.id}")
+        p.destroy
+      end
     end
+    correct_participant
+  end
+
+  def total_time
+    participant_total_time = 0
+    self.activities.each do |a|
+      participant_total_time += a.duration
+    end
+    participant_total_time
   end
 
 end
