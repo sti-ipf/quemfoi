@@ -1,0 +1,2 @@
+page.redirect_to(certificates_path)
+

@@ -1,4 +1,4 @@
-<a href="#" onclick="$.post('/certificates/update_course/1', { selected_names: getSelectedNames(), correct_name: getCorrectName()});">Atualizar</a>
+<a href="#" onclick="$.post('/certificates/update_course/1', {course_id: <%=@course.id%>, selected_names: getSelectedNames(), correct_name: getCorrectName()});">Atualizar</a>
 <table>
 	<tr height="225">
 		<td width="220"><div id="ListBoxAllItems" style="height:225px;"></div></td>
@@ -71,10 +71,10 @@
   }
 
   function getSelectedNames(){
-  	items = window.listBoxSelectedItems.items
-  	selected_names = '';
+  	items = window.listBoxSelectedItems.items;
+  	selected_names = [];
     jQuery.each(getItems(items), function() {
-      selected_names += '|'+this;
+      selected_names.push(this.toString());
     });
     return selected_names;
   }
