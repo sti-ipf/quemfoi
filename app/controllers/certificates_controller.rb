@@ -3,8 +3,6 @@ class CertificatesController < ApplicationController
   layout 'certicate'
 
   def index
-    a = []
-    10000.times{|i| a << "#{i}aáa"}
     @participants = Participant.get_names
   end
 
@@ -33,10 +31,11 @@ class CertificatesController < ApplicationController
   end
 
   def edit_course
-    @course = Course.find(params[:id])
+    @course_id = params[:id].to_i
     @participants = []
-    @course.participants.each do |p|
-      name = p.name.gsub("'","")
+    Participant.all(:conditions => "course_id = #{@course_id}", :order => "name ASC").each do |p|
+      next if p.name.blank?
+      name = p.name.gsub("'","&#39;")
       @participants << name if !(@participants.include?(name))
     end
   end

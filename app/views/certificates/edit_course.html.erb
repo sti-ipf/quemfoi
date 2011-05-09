@@ -1,4 +1,4 @@
-<a href="#" onclick="$.post('/certificates/update_course/1', {course_id: <%=@course.id%>, selected_names: getSelectedNames(), correct_name: getCorrectName()});">Atualizar</a>
+<a href="#" onclick="$.post('/certificates/update_course/1', {course_id: <%=@course_id%>, selected_names: getSelectedNames(), correct_name: getCorrectName()});">Atualizar</a>
 <table>
 	<tr height="225">
 		<td width="220"><div id="ListBoxAllItems" style="height:225px;"></div></td>
@@ -18,7 +18,7 @@
 		window.listBoxCorrectItem = new JSListBox({'containerSelector':'ListBoxCorrectItem'});
 
 		var allItems = [];
-    var participants = <%=array_or_string_for_javascript(@participants)%>;
+    var participants = <%=array_or_string_for_javascript(@participants).html_safe%>;
     jQuery.each(participants, function() {
   		allItems.push(new MyListBoxItem(this));
     });
