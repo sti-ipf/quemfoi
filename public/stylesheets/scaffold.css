@@ -125,11 +125,24 @@ img#header{ float: left;}
   list-style: none outside none;
 }
 
-#ListBoxSelectedItems, #ListBoxCorrectItem{
-    margin-left: 20px;
-    margin-top: 160px;
-    position: fixed !important;
-    top: 0;
-    width: 300px;
+#tdAllItems, #tdSelectedItems, #tdCorrectItem{
+  padding: 10px;
+}
+
+#tdSelectedItems{
+  position: fixed !important;
+  margin-left: 20px;
+  background-color: #FFFA7C;
+}
+
+#tdCorrectItem{
+  position: fixed !important;
+  margin-left: 300px;
+  background-color: #9FF19F;
+}
+
+#update_names{
+    margin-left: 13px;
+    position: relative;
 }
 
