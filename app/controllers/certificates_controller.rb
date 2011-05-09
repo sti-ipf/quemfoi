@@ -14,7 +14,7 @@ class CertificatesController < ApplicationController
     if @participant.nil?
       @certificates = []
     else
-      @certificates = @participant.certificates 
+      @certificates = @participant.certificates
       @course = @participant.course
     end
     render :layout => false if request.xhr?
@@ -31,19 +31,19 @@ class CertificatesController < ApplicationController
       Resque.enqueue(CertificateSender,params[:certificate_id], params[:email], @to_support)
     end
   end
-  
+
   def edit_course
     @course = Course.find(params[:id])
     @participants = []
-    @course.participants.each do |p| 
+    @course.participants.each do |p|
       name = p.name.gsub("'","")
       @participants << name if !(@participants.include?(name))
     end
-    puts @participants.inspect
   end
 
   def update_course
+    render :text => 'teste'
   end
-  
+
 end
 

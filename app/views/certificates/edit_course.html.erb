@@ -1,14 +1,86 @@
-<div id="search_bar">
-  <% form_tag certificates_search_path, :id => 'search_form' do %>
-    <%= text_field_tag :search, '', :size => 20 %>
-    <%= submit_tag t('search'), :disable_with => t('please_wait_searching'), :id => 'search_submit' %>
-  <% end %>
-</div>
+<a href="#" onclick="$.post('/certificates/update_course/1', { selected_names: getSelectedNames(), correct_name: getCorrectName()});">Atualizar</a>
+<table>
+	<tr height="225">
+		<td width="220"><div id="ListBoxAllItems" style="height:225px;"></div></td>
+		<td width="220"><div id="ListBoxSelectedItems" style="height:225px;"></div></td>
+		<td width="220"><div id="ListBoxCorrectItem" style="height:225px;"></div></td>
+	</tr>
+</table>
 
-<script>
-  $(document).ready(function(){
-    var data = <%=array_or_string_for_javascript(@participants)%>;
-    $( "#search" ).autocomplete(data, {max:10});
-  });
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('#new_review').submit(function (){
+      $.post($(this).attr('action'), $(this).serialize(), null, "script");
+    return false;
+    });
+		window.listBoxAllItems = new JSListBox({'containerSelector':'ListBoxAllItems'});
+		window.listBoxSelectedItems = new JSListBox({'containerSelector':'ListBoxSelectedItems'});
+		window.listBoxCorrectItem = new JSListBox({'containerSelector':'ListBoxCorrectItem'});
+
+		var allItems = [];
+    var participants = <%=array_or_string_for_javascript(@participants)%>;
+    jQuery.each(participants, function() {
+  		allItems.push(new MyListBoxItem(this));
+    });
+		window.listBoxAllItems.addItems(allItems);
+	});
+
+	MyListBoxItem = JSListBox.Item.extend({
+
+		text: "",
+
+		init: function(text) {
+			this.text = text;
+		},
+
+		render: function() {
+			return '<a href="#">' + this.text + '</a>';
+		},
+
+		onClick: function() {
+			var item = new JSListBox.Item();
+			item.value = this.text;
+			items = window.listBoxSelectedItems.items
+			if (items[0] != undefined){
+        var selected_items = getItems(items);
+			  if (jQuery.inArray(this.text, selected_items) == -1){
+			    window.listBoxSelectedItems.addItem(item);
+			  }
+        insertItemInCorrectList(item);
+			}
+			else{
+		    window.listBoxSelectedItems.addItem(item);
+		    insertItemInCorrectList(item);
+			}
+		},
+
+	});
+	function getItems(items)
+  {
+    var my_items = [];
+    jQuery.each(items, function() {
+      my_items.push(this.value);
+    });
+   return my_items;
+  }
+
+  function insertItemInCorrectList(item){
+    window.listBoxCorrectItem.items = [];
+    window.listBoxCorrectItem.refresh();
+    window.listBoxCorrectItem.addItem(item);
+  }
+
+  function getSelectedNames(){
+  	items = window.listBoxSelectedItems.items
+  	selected_names = '';
+    jQuery.each(getItems(items), function() {
+      selected_names += '|'+this;
+    });
+    return selected_names;
+  }
+
+  function getCorrectName(){
+    return window.listBoxCorrectItem.items[0].value.toString();
+  }
 </script>
 
