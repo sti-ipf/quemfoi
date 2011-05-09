@@ -42,7 +42,12 @@ class CertificatesController < ApplicationController
   end
 
   def update_course
-    render :text => 'teste'
+    Participant.update_incorrect_participants(params)
+    flash[:notice] = "Dados atualizados com sucesso"
+    respond_to do |format|
+      format.js if request.xhr?
+      format.html
+    end
   end
 
 end
