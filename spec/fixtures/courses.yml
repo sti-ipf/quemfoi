@@ -1,7 +1,10 @@
 ruby:
-  identifier: "2007 (R1) - Formação com Coordenadores(as) Pedagágicos(as), Vice-Diretores(as) e Diretores(as)"
-  description: "Apresentação dos principais conceitos que caracterizam o Projeto Eco-Político-Pedagagico  (PEPP) e Plano de Trabalho Anual (PTA) na perspectiva da Escola Cidadã.  Reflexão acerca da importância da Leitura do Mundo da escola para a ação transformadora. Reflexão sobre o papel da equipe gestora no processo de construação dos instrumentos necessários para a elaboração coletiva do Plano de Trabalho Anual. Reflexão acerca do conceito de participação e suas implicacoes na gestão escolar. Análise das atribuições pedagogicas e administrativas do trio gestor. Avaliação e acompanhamento do processo de construação do PTA das Unidades Educacionais."
+  identifier: "ruby01"
+  description: "Basic Ruby Course"
 rails:
   identifier: "rails01"
   description: "Rails course"
+ipf:
+  identifier: "2007 (R1) - Formação com Coordenadores(as) Pedagágicos(as), Vice-Diretores(as) e Diretores(as)"
+  description: "Apresentação dos principais conceitos que caracterizam o Projeto Eco-Político-Pedagagico  (PEPP) e Plano de Trabalho Anual (PTA) na perspectiva da Escola Cidadã.  Reflexão acerca da importância da Leitura do Mundo da escola para a ação transformadora. Reflexão sobre o papel da equipe gestora no processo de construação dos instrumentos necessários para a elaboração coletiva do Plano de Trabalho Anual. Reflexão acerca do conceito de participação e suas implicacoes na gestão escolar. Análise das atribuições pedagogicas e administrativas do trio gestor. Avaliação e acompanhamento do processo de construação do PTA das Unidades Educacionais."
 

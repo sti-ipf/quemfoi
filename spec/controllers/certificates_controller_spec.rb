@@ -38,7 +38,7 @@ describe CertificatesController do
     it 'not assigns @certificates with participant certificates, when participant is nil' do
       Participant.should_receive(:find_by_name).and_return(nil)
       get :search
-      assigns[:certificates].should == nil
+      assigns[:certificates].should == []
     end
 
   end

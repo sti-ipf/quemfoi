@@ -70,7 +70,7 @@ describe CoursesController do
       course.stub(:find).and_return(course)
       course.stub(:destroy).and_return(:true)
       put :destroy, :id => @course.id
-      response.should redirect_to(:action => 'index')
+      response.should redirect_to(courses_path)
     end
   end
 
