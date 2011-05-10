@@ -73,6 +73,14 @@ describe CertificatesController do
     end
   end
 
+  describe 'POST #update_course' do
+    it 'post update_course' do
+      Participant.should_receive(:update_incorrect_participants).and_return([])
+      post :update_course, :format => "js"
+      flash[:notice].should == "Dados atualizados com sucesso"
+    end
+  end
+
 
 end
 

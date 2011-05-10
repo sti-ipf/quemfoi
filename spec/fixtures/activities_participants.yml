@@ -13,4 +13,10 @@ four:
 five:
   participant: ademar_rails
   activity: rails_activity_two
+six:
+  participant: joseh
+  activity: rails_activity_one
+seven:
+  participant: josee
+  activity: rails_activity_two
 
