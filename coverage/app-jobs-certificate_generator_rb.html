@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td class="left_align"><a href="app-jobs-certificate_generator_rb.html">app/jobs/certificate_generator.rb</a></td>
-            <td class='right_align'><tt>31</tt></td>
-            <td class='right_align'><tt>28</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
+            <td class='right_align'><tt>77</tt></td>
+            <td class='right_align'><tt>69</tt></td>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>74.03%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:100px"></div>
-            <div class="uncovered" style="width:0px"></div>
+            <div class="covered" style="width:74px"></div>
+            <div class="uncovered" style="width:26px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>71.01%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:100px"></div>
-            <div class="uncovered" style="width:0px"></div>
+            <div class="covered" style="width:71px"></div>
+            <div class="uncovered" style="width:29px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -68,182 +68,458 @@
         
           
           
-          <tr class="inferred">
-            <td><pre><a name="line3">3</a> </pre></td>
+          <tr class="marked">
+            <td><pre><a name="line3">3</a>   FOR_COURSE = 1</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line4">4</a>   def self.perform(course_id)</pre></td>
+            <td><pre><a name="line4">4</a>   FOR_PARTICIPANT = 2</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line5">5</a>     @info = Util::Log.new(:prefix=&gt;&quot;CERTIFICATE_GENERATOR&quot;)</pre></td>
+            <td><pre><a name="line5">5</a>   def self.perform(action, id)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line6">6</a>     @info.log &quot;Iniciando geração dos certificados para o curso com id #{course_id}&quot;</pre></td>
+            <td><pre><a name="line6">6</a>     info = Util::Log.new(:prefix=&gt;&quot;CERTIFICATE_GENERATOR&quot;)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line7">7</a>     course = Course.find(course_id)</pre></td>
+            <td><pre><a name="line7">7</a>     case action</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line8">8</a>     course_total_time = course.total_time</pre></td>
+            <td><pre><a name="line8">8</a>       when FOR_COURSE then for_course(id, info)</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line9">9</a>     participants = course.participants_info</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line9">9</a>       when FOR_PARTICIPANT then for_participant(id, info)</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line10">10</a>     participants.each do |info|</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line10">10</a>     end</pre></td>
           </tr>
         
           
           
-          <tr class="marked">
-            <td><pre><a name="line11">11</a>       participant = info[0]</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line12">12</a>       frequency = course_total_time &gt; 0 ? ((info[1]/course_total_time.to_f)*100).floor : 0</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line13">13</a>       file_name = &quot;#{clean_string(course.identifier)}_#{clean_string(participant.name)}.pdf&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line14">14</a>       c = Certificate.new(</pre></td>
+          <tr class="uncovered">
+            <td><pre><a name="line11">11</a>   end</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line15">15</a>         :participant =&gt; participant,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line16">16</a>         :course =&gt; course,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line17">17</a>         :total_hours =&gt; course_total_time,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line18">18</a>         :frequency =&gt; frequency,</pre></td>
+            <td><pre><a name="line12">12</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line19">19</a>         :period =&gt; &quot;#{course.start_date.strftime(&quot;%d/%m/%Y&quot;)} à #{course.end_date.strftime(&quot;%d/%m/%Y&quot;)}&quot;,</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line20">20</a>         :file_path =&gt; &quot;#{RAILS_ROOT}/public/certificates/#{file_name}&quot;)</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line21">21</a>       c.save</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="marked">
-            <td><pre><a name="line22">22</a>       c.save_file</pre></td>
+            <td><pre><a name="line13">13</a> private</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line23">23</a>     end</pre></td>
+            <td><pre><a name="line14">14</a> </pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line24">24</a>     @info.log &quot;Finalizada geração dos certificados para o curso com id #{course_id}&quot;</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line25">25</a>   end</pre></td>
-          </tr>
-        
-          
-          
-          <tr class="inferred">
-            <td><pre><a name="line26">26</a> </pre></td>
+            <td><pre><a name="line15">15</a>   def self.for_course(course_id, info)</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line27">27</a>   def self.clean_string(string)</pre></td>
+            <td><pre><a name="line16">16</a>     info.log &quot;Iniciada geração dos certificados para o curso com id #{course_id}&quot;</pre></td>
           </tr>
         
           
           
           <tr class="marked">
-            <td><pre><a name="line28">28</a>     string.remover_acentos.downcase.gsub(' ', '_')</pre></td>
+            <td><pre><a name="line17">17</a>     course = Course.find(course_id)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line18">18</a>     course_total_time = course.total_time</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line19">19</a>     participants = course.participants_info</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line20">20</a>     directory = &quot;#{RAILS_ROOT}/public/certificates/#{course_id}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line21">21</a>     Dir.mkdir(directory) if !File.directory?(directory)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line22">22</a>     participants.each do |participants_info|</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line23">23</a>       participant = participants_info[0]</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line24">24</a>       next if participant.certificates.count &gt; 0</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line25">25</a>       frequency = calc_frequency(participants_info[1], course_total_time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line26">26</a>       file_name = &quot;#{course_id}_#{clean_string(participant.name)}.pdf&quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line29">29</a>   end</pre></td>
+            <td><pre><a name="line27">27</a>       create_certificate_for_participant(:participant =&gt; participant, :course =&gt; course,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line28">28</a>         :course_total_time =&gt; course_total_time, :frequency =&gt; frequency, :file_name =&gt; file_name)</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line30">30</a> end</pre></td>
+            <td><pre><a name="line29">29</a>     end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line30">30</a>     course.certificates_generated = true</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line31">31</a>     course.save</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line32">32</a>     info.log &quot;Finalizada geração dos certificados para o curso com id #{course_id}&quot;</pre></td>
           </tr>
         
           
           
           <tr class="inferred">
-            <td><pre><a name="line31">31</a> </pre></td>
+            <td><pre><a name="line33">33</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line34">34</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line35">35</a>   def self.for_participant(participant_id, info)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line36">36</a>     participant = Participant.find(participant_id)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line37">37</a>     info.log &quot;Iniciada geração do certificado para o participante com id #{participant.id}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line38">38</a>     participant.certificates {|c| c.destroy}</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line39">39</a>     course = participant.course</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line40">40</a>     course_total_time = course.total_time</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line41">41</a>     frequency = calc_frequency(participant.total_time, course_total_time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line42">42</a>     file_name = &quot;#{course.id}_#{clean_string(participant.name)}.pdf&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line43">43</a>     certificate = create_certificate_for_participant(:participant =&gt; participant, :course =&gt; course,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line44">44</a>       :course_total_time =&gt; course_total_time, :frequency =&gt; frequency, :file_name =&gt; file_name)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line45">45</a>     info.log &quot;Finalizada geração do certificado para o participante com id #{participant.id}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line46">46</a>     info.log &quot;O certificado foi gerado em: #{RAILS_ROOT}/public/certificates/#{course.id}/#{file_name}&quot;</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line47">47</a>     puts is_email?(participant.contact)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line48">48</a>     Resque.enqueue(CertificateSender,certificate.id, 'ffc.fabricio@gmail.com', false) if is_email?('ffc.fabricio@gmail.com')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line49">49</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line50">50</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line51">51</a>   def self.create_certificate_for_participant(params={})</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line52">52</a>     c = Certificate.new(</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line53">53</a>       :participant =&gt; params[:participant],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line54">54</a>       :course =&gt; params[:course],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line55">55</a>       :total_hours =&gt; params[:course_total_time],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line56">56</a>       :frequency =&gt; params[:frequency],</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line57">57</a>       :period =&gt; &quot;#{params[:course].start_date.strftime(&quot;%d/%m/%Y&quot;)} à #{params[:course].end_date.strftime(&quot;%d/%m/%Y&quot;)}&quot;,</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line58">58</a>       :file_path =&gt; &quot;#{RAILS_ROOT}/public/certificates/#{params[:course].id}/#{params[:file_name]}&quot;)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line59">59</a>     c.save</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line60">60</a>     c.save_file</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line61">61</a>     c</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line62">62</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line63">63</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line64">64</a>   def self.calc_frequency(participant_total_time, course_total_time)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line65">65</a>     frequency = course_total_time &gt; 0 ? ((participant_total_time/course_total_time.to_f)*100).floor : 0</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line66">66</a>     frequency = frequency &lt; 0 ? -frequency : frequency</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line67">67</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line68">68</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line69">69</a>   def self.clean_string(string)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line70">70</a>     string.remover_acentos.downcase.gsub(' ', '_')</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line71">71</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line72">72</a> </pre></td>
+          </tr>
+        
+          
+          
+          <tr class="marked">
+            <td><pre><a name="line73">73</a>   def self.is_email?(string)</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line74">74</a>     !(string.match(/^([^@s]+)@((?:[-a-z0-9]+.)+[a-z]{2,})$/i)).nil?</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line75">75</a>   end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="uncovered">
+            <td><pre><a name="line76">76</a> end</pre></td>
+          </tr>
+        
+          
+          
+          <tr class="inferred">
+            <td><pre><a name="line77">77</a> </pre></td>
           </tr>
         
       </tbody>
     </table>
 
-    <p>Generated on Fri Apr 29 12:49:43 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.7.1</a></p>
+    <p>Generated on Tue May 10 00:54:06 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>

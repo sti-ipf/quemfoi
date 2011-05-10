@@ -3,7 +3,7 @@ require 'spec_helper'
 describe CertificateGenerator do
 
   def clean_certificates_directory
-    Dir['public/certificates/*.pdf'].each do |file|
+    Dir["public/certificates/#{@course_id}/*.pdf"].each do |file|
       FileUtils.rm_rf(file)
     end
   end
@@ -21,13 +21,14 @@ describe CertificateGenerator do
   end
 
   before(:each) do
+    @course_id = Course.find_by_identifier('ruby01').id
     clean_certificates_directory
   end
 
   it 'generate all certificates' do
-    CertificateGenerator.perform(Course.find_by_identifier('ruby01').id)
-    total_files = Dir['public/certificates/*.pdf'].count
-    total_participants = get_total_of_participants
+    CertificateGenerator.perform(CertificateGenerator::FOR_COURSE, @course_id)
+    total_files = Dir["public/certificates/#{@course_id}/*.pdf"].count
+    total_participants = (get_total_of_participants - 1) #minus one, because Ademar's certificate was generated in fixtures
     total_files.should eq(total_participants)
   end
 

@@ -18,8 +18,6 @@ gem 'whenever'
 gem 'brstring'
 gem 'json'
 gem 'levenshtein'
-
-group :development, :test do
-  gem 'rspec-rails'
-end
+gem 'rcov'
+gem 'rspec-rails'
 

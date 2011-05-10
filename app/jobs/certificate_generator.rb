@@ -19,10 +19,10 @@ private
     participants = course.participants_info
     directory = "#{RAILS_ROOT}/public/certificates/#{course_id}"
     Dir.mkdir(directory) if !File.directory?(directory)
-    participants.each do |info|
-      participant = info[0]
+    participants.each do |participants_info|
+      participant = participants_info[0]
       next if participant.certificates.count > 0
-      frequency = calc_frequency(info[1], course_total_time)
+      frequency = calc_frequency(participants_info[1], course_total_time)
       file_name = "#{course_id}_#{clean_string(participant.name)}.pdf"
       create_certificate_for_participant(:participant => participant, :course => course,
         :course_total_time => course_total_time, :frequency => frequency, :file_name => file_name)
