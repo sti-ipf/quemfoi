@@ -20,14 +20,14 @@ Quemfoi::Application.routes.draw do
   match 'certificates/update_course' => 'certificates#update_course', :as => :certificate_update_course
   resources :certificates, :only => [ :index]
 
-#  root :to => 'certificates#index'
-  root :to => 'courses#index'
-  resources :courses  do
-    resources :activities, :except => [ :index, :show ]
-    member do
-      get 'participants_status'
-    end
-  end
+  root :to => 'certificates#index'
+#  root :to => 'courses#index'
+#  resources :courses  do
+#    resources :activities, :except => [ :index, :show ]
+#    member do
+#      get 'participants_status'
+#    end
+#  end
 
   # Sample resource route with options:
   #   resources :products do
