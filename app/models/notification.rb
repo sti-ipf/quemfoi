@@ -5,7 +5,6 @@ class Notification < ActionMailer::Base
     certificate = Certificate.find(certificate_id)
     participant = certificate.participant
     course = certificate.course
-    puts to_support
     if to_support == "true"
       body_string = <<-HEREDOC
 Olá,
@@ -23,7 +22,7 @@ HEREDOC
     end
 
     attachments['certificado.pdf'] = File.read("#{certificate.file_path}")
-    mail(:from => 'snoteapp@gmail.com', :to => to, :subject => subject) do |format|
+    mail(:from => 'certificados@paulofreire.org', :to => to, :subject => subject) do |format|
       format.text { render :text => body_string }
     end
   end
