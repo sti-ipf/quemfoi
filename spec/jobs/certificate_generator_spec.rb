@@ -22,14 +22,20 @@ describe CertificateGenerator do
 
   before(:each) do
     @course_id = Course.find_by_identifier('ruby01').id
+    @participant = Participant.first(:conditions => "name = 'Ademar da Silva'")
     clean_certificates_directory
   end
 
-  it 'generate all certificates' do
+  it 'generate all certificates for course' do
     CertificateGenerator.perform(CertificateGenerator::FOR_COURSE, @course_id)
     total_files = Dir["public/certificates/#{@course_id}/*.pdf"].count
     total_participants = (get_total_of_participants - 1) #minus one, because Ademar's certificate was generated in fixtures
     total_files.should eq(total_participants)
+  end
+
+  it 'generate certificate for participant' do
+    CertificateGenerator.perform(CertificateGenerator::FOR_PARTICIPANT, @participant.id)
+    File.exists?("#{RAILS_ROOT}/public/certificates/#{@participant.course.id}/#{@participant.course.id}_ademar_da_silva.pdf").should be_true
   end
 
 end

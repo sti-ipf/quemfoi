@@ -6,6 +6,7 @@ describe Certificate do
 
   before(:each) do
     @ruby_course = courses(:ruby)
+    @ipf_course = courses(:ipf)
     @ademar = participants(:ademar)
   end
 
@@ -14,6 +15,20 @@ describe Certificate do
     c = Certificate.new(
       :participant => @ademar,
       :course => @ruby_course,
+      :total_hours => 120,
+      :frequency => 80,
+      :period => "18 à 21 de março de 2011",
+      :file_path => file_path)
+    c.save_file
+    File.exist?(file_path).should be_true
+    c.save.should be_true
+  end
+
+  it 'save certificate with a long description' do
+    file_path = "#{RAILS_ROOT}/public/certificates/teste1.pdf"
+    c = Certificate.new(
+      :participant => @ademar,
+      :course => @ipf_course,
       :total_hours => 120,
       :frequency => 80,
       :period => "18 à 21 de março de 2011",

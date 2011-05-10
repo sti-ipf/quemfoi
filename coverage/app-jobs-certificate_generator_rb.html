@@ -30,15 +30,15 @@
             <td class="left_align"><a href="app-jobs-certificate_generator_rb.html">app/jobs/certificate_generator.rb</a></td>
             <td class='right_align'><tt>77</tt></td>
             <td class='right_align'><tt>69</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>74.03%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:74px"></div>
-            <div class="uncovered" style="width:26px"></div>
+            <div class="covered" style="width:100px"></div>
+            <div class="uncovered" style="width:0px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>71.01%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>100.00%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:71px"></div>
-            <div class="uncovered" style="width:29px"></div>
+            <div class="covered" style="width:100px"></div>
+            <div class="uncovered" style="width:0px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -104,19 +104,19 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line9">9</a>       when FOR_PARTICIPANT then for_participant(id, info)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line10">10</a>     end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line11">11</a>   end</pre></td>
           </tr>
         
@@ -266,85 +266,85 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line36">36</a>     participant = Participant.find(participant_id)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line37">37</a>     info.log &quot;Iniciada geração do certificado para o participante com id #{participant.id}&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line38">38</a>     participant.certificates {|c| c.destroy}</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line39">39</a>     course = participant.course</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line40">40</a>     course_total_time = course.total_time</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line41">41</a>     frequency = calc_frequency(participant.total_time, course_total_time)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line42">42</a>     file_name = &quot;#{course.id}_#{clean_string(participant.name)}.pdf&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line43">43</a>     certificate = create_certificate_for_participant(:participant =&gt; participant, :course =&gt; course,</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line44">44</a>       :course_total_time =&gt; course_total_time, :frequency =&gt; frequency, :file_name =&gt; file_name)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line45">45</a>     info.log &quot;Finalizada geração do certificado para o participante com id #{participant.id}&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line46">46</a>     info.log &quot;O certificado foi gerado em: #{RAILS_ROOT}/public/certificates/#{course.id}/#{file_name}&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line47">47</a>     puts is_email?(participant.contact)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line48">48</a>     Resque.enqueue(CertificateSender,certificate.id, 'ffc.fabricio@gmail.com', false) if is_email?('ffc.fabricio@gmail.com')</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line49">49</a>   end</pre></td>
           </tr>
         
@@ -494,19 +494,19 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line74">74</a>     !(string.match(/^([^@s]+)@((?:[-a-z0-9]+.)+[a-z]{2,})$/i)).nil?</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line75">75</a>   end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line76">76</a> end</pre></td>
           </tr>
         
@@ -519,7 +519,7 @@
       </tbody>
     </table>
 
-    <p>Generated on Tue May 10 00:54:06 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Tue May 10 13:08:04 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>

@@ -30,15 +30,15 @@
             <td class="left_align"><a href="app-models-participant_rb.html">app/models/participant.rb</a></td>
             <td class='right_align'><tt>44</tt></td>
             <td class='right_align'><tt>39</tt></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>50.00%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>93.18%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:50px"></div>
-            <div class="uncovered" style="width:50px"></div>
+            <div class="covered" style="width:93px"></div>
+            <div class="uncovered" style="width:7px"></div>
           </div></td>
-            <td class="left_align"><div class="percent_graph_legend"><tt class=''>43.59%</tt></div>
+            <td class="left_align"><div class="percent_graph_legend"><tt class=''>92.31%</tt></div>
           <div class="percent_graph">
-            <div class="covered" style="width:44px"></div>
-            <div class="uncovered" style="width:56px"></div>
+            <div class="covered" style="width:92px"></div>
+            <div class="uncovered" style="width:8px"></div>
           </div></td>
           </tr>
         </tbody>
@@ -122,61 +122,61 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line12">12</a>     name_condition = ''</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line13">13</a>     selected_names = params[:selected_names]</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line14">14</a>     course_id = params[:course_id].to_i</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line15">15</a>     correct_name = params[:correct_name]</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line16">16</a>     selected_names.each do |name|</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line17">17</a>       name_condition &lt;&lt; &quot;name = '#{name}'&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line18">18</a>       name_condition &lt;&lt; &quot; OR &quot; if name != selected_names.last</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line19">19</a>     end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line20">20</a>     incorrect_participants = Participant.find_by_sql(&quot;</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line21">21</a>       SELECT * FROM participants p</pre></td>
           </tr>
         
@@ -200,55 +200,55 @@
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line25">25</a>     correct_participant = Participant.first(:conditions =&gt; &quot;course_id = #{course_id} AND name = '#{correct_name}'&quot;)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line26">26</a>     incorrect_participants.each do |p|</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line27">27</a>       if p.name != correct_participant.name</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line28">28</a>         ActiveRecord::Base.connection.execute(&quot;UPDATE activities_participants set participant_id = #{correct_participant.id} WHERE participant_id = #{p.id}&quot;)</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line29">29</a>         p.destroy</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line30">30</a>       end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line31">31</a>     end</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="marked">
             <td><pre><a name="line32">32</a>     correct_participant</pre></td>
           </tr>
         
           
           
-          <tr class="uncovered">
+          <tr class="inferred">
             <td><pre><a name="line33">33</a>   end</pre></td>
           </tr>
         
@@ -321,7 +321,7 @@
       </tbody>
     </table>
 
-    <p>Generated on Tue May 10 00:54:06 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
+    <p>Generated on Tue May 10 13:08:04 -0300 2011 with <a href="http://github.com/relevance/rcov">rcov 0.9.8</a></p>
 
   </body>
 </html>
