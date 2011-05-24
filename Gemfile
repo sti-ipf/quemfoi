@@ -20,4 +20,5 @@ gem 'json'
 gem 'levenshtein'
 gem 'rcov'
 gem 'rspec-rails'
+gem 'fastercsv'
 
