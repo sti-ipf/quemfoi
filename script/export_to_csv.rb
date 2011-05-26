@@ -3,9 +3,11 @@ require 'rubygems'
 require File.dirname(__FILE__)+'/../config/application'
 require File.dirname(__FILE__)+'/../config/environment'
 
-FasterCSV.open("temp.csv", "w") do |csv|
-  csv << ["line1row1", "line1row2"]
-  csv << ["line2row1", "line2row2"]
-  # ...
+units = Participant.find_by_sql("SELECT DISTINCT unit FROM participants")
+units.each do |unit|
+  next if unit.unit.nil?
+  file_name = unit.unit.remover_acentos.gsub(/[' \/]/,"")
+  participants = Participant.all(:conditions => "unit = '#{unit.unit}'", :order => "name")
+  Util::Csv.generate(participants, file_name)
 end
 

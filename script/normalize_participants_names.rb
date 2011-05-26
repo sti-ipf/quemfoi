@@ -21,7 +21,9 @@ end
 def update_tmp_participant(participants, tmp_participant_id)
   participants.each do |p|
     if !p.unit.nil?
-      p_unit = p.unit.gsub("'","")
+      p_unit = remove_apostrophe(p.unit)
+      p.group = remove_apostrophe(p.group)
+      p.contact = remove_apostrophe(p.contact)
       ActiveRecord::Base.connection.execute("
         UPDATE tmp_participants SET p_group = '#{p.group}',
           unit = '#{p_unit}', contact = '#{p.contact}'
@@ -34,7 +36,7 @@ def populate_temporary_table
   Course.all.each do |c|
     new_names = []
     c.participants.each do |p|
-      p.name = p.name.gsub("'", "")
+      p.name = remove_apostrophe(p.name)
       name_splitted = p.name.split(' ')
       new_name = "#{name_splitted.first} #{name_splitted.last}"
       if !new_names.include?(new_name) && new_name_is_valid?(new_name)
@@ -54,6 +56,10 @@ def new_name_is_valid?(new_name)
   else
     return true
   end
+end
+
+def remove_apostrophe(string)
+  string.gsub("'","")
 end
 
 def create_temporary_table
