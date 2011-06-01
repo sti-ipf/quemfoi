@@ -3,10 +3,10 @@ require 'rubygems'
 require File.dirname(__FILE__)+'/../config/application'
 require File.dirname(__FILE__)+'/../config/environment'
 
-file = File.new("#{File.dirname(__FILE__)}/../db/data_from_old_schema.latin1", "w+")
+file = File.new("#{File.dirname(__FILE__)}/../db/data_from_old_schema.rb", "w+")
 
 def clean_string(s)
-  s.gsub("\"","'").remover_acentos
+  s.gsub("\"","'")
 end
 
 Course.all.each do |c|
@@ -22,9 +22,11 @@ course = Course.create(:identifier => \"#{c.identifier}\", :description => \"#{c
     a.leader = clean_string(a.leader)
     file.puts "
 activity = Activity.create(:name => \"#{a.name}\", :date => \"#{a.date}\", :place => \"#{a.place}\",
-  :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.start_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :end_time => DateTime.strptime(\"#{a.date} #{a.end_time}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)"
+  :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.start_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"),
+  :end_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.end_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)"
 puts "activity = Activity.create(:name => \"#{a.name}\", :date => \"#{a.date}\", :place => \"#{a.place}\",
-  :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.start_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :end_time => DateTime.strptime(\"#{a.date} #{a.end_time}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)"
+  :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.start_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"),
+  :end_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.end_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)"
     a.participants.each do |p|
       p.name = clean_string(p.name)
       p.group = clean_string(p.group)

@@ -57,7 +57,7 @@ private
       :period => "#{params[:course].start_date.strftime("%d/%m/%Y")} à #{params[:course].end_date.strftime("%d/%m/%Y")}",
       :file_path => "#{RAILS_ROOT}/public/certificates/#{params[:course].id}/#{params[:file_name]}")
     c.save
-    c.save_file
+#    c.save_file
     c
   end
 
