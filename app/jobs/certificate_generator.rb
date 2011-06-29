@@ -62,7 +62,7 @@ private
   end
 
   def self.calc_frequency(participant_total_time, course_total_time)
-    frequency = course_total_time > 0 ? ((participant_total_time/course_total_time.to_f)*100).floor : 0
+    frequency = course_total_time > 0 ? ((participant_total_time*100)/course_total_time.to_f).floor : 0
     frequency = frequency < 0 ? -frequency : frequency
   end
 

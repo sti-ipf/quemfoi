@@ -20,13 +20,18 @@ course = Course.create(:identifier => \"#{c.identifier}\", :description => \"#{c
     a.name = clean_string(a.name)
     a.place = clean_string(a.place)
     a.leader = clean_string(a.leader)
-    file.puts "
-activity = Activity.create(:name => \"#{a.name}\", :date => \"#{a.date}\", :place => \"#{a.place}\",
-  :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.start_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"),
-  :end_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.end_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)"
-puts "activity = Activity.create(:name => \"#{a.name}\", :date => \"#{a.date}\", :place => \"#{a.place}\",
-  :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.start_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"),
-  :end_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.end_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)"
+    if a.end_time.strftime('%H:%M:%S') == "00:00:00"
+          file.puts "
+      activity = Activity.create(:name => \"#{a.name}\", :date => \"#{a.date}\", :place => \"#{a.place}\", :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.start_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :end_time => DateTime.strptime(\"#{(a.date+1).strftime('%Y/%m/%d')} #{a.end_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)"
+      puts "activity = Activity.create(:name => \"#{a.name}\", :date => \"#{a.date}\", :place => \"#{a.place}\",
+      :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.start_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"),
+        :end_time => DateTime.strptime(\"#{(a.date+1).strftime('%Y/%m/%d')} #{a.end_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)"
+    else
+      file.puts "activity = Activity.create(:name => \"#{a.name}\", :date => \"#{a.date}\", :place => \"#{a.place}\", :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.start_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :end_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.end_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)"
+  puts "activity = Activity.create(:name => \"#{a.name}\", :date => \"#{a.date}\", :place => \"#{a.place}\",
+    :leader => \"#{a.leader}\", :start_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.start_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"),
+    :end_time => DateTime.strptime(\"#{a.date.strftime('%Y/%m/%d')} #{a.end_time.strftime('%H:%M:%S')}\", \"%Y/%m/%d %H:%M:%S\"), :course => course)"
+  end
     a.participants.each do |p|
       p.name = clean_string(p.name)
       p.group = clean_string(p.group)
@@ -34,11 +39,9 @@ puts "activity = Activity.create(:name => \"#{a.name}\", :date => \"#{a.date}\",
       p.contact = clean_string(p.contact)
       if !participants.include?(p.name)
         participants << p.name
-        file.puts "
-participant = Participant.create(:name => \"#{p.name}\", :group => \"#{p.group}\", :unit => \"#{p.unit}\",
-  :contact => \"#{p.contact}\", :course => course)"
+        file.puts "participant = Participant.create(:name => \"#{p.name}\", :group => \"#{p.group}\", :unit => \"#{p.unit}\", :contact => \"#{p.contact.gsub('/','-')}\", :course => course)"
 puts "participant = Participant.create(:name => \"#{p.name}\", :group => \"#{p.group}\", :unit => \"#{p.unit}\",
-  :contact => \"#{p.contact}\", :course => course)"
+  :contact => \"#{p.contact.gsub('/','-')}\", :course => course)"
       else
         file.puts "participant = Participant.find_by_name(\"#{p.name}\")"
         puts "participant = Participant.find_by_name(\"#{p.name}\")"

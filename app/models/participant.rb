@@ -3,7 +3,7 @@ class Participant < ActiveRecord::Base
   has_many :certificates
   has_many :activities_participants
   has_many :activities, :through => :activities_participants
-
+  # belongs_to :activity
   def self.get_names
     Participant.all(:select => 'name', :group => 'name').collect {|p| p.name.gsub("'","")}
   end
@@ -32,10 +32,14 @@ class Participant < ActiveRecord::Base
     correct_participant
   end
 
-  def total_time
+  def total_time(course_id)
     participant_total_time = 0
+    activities_array = []
     self.activities.each do |a|
-      participant_total_time += a.duration
+      if !activities_array.include?(a.id)
+        activities_array << a.id
+        participant_total_time += a.duration if a.course_id == course_id
+      end
     end
     participant_total_time
   end

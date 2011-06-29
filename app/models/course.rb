@@ -34,7 +34,7 @@ class Course < ActiveRecord::Base
   def participants_info
     info_about_participants = []
     participants.each do |p|
-      info_about_participants << [p, p.total_time]
+      info_about_participants << [p, p.total_time(self.id)]
     end
     info_about_participants
   end
