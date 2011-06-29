@@ -1,5 +1,5 @@
 class Activity < ActiveRecord::Base
-  has_many :activities_participants
+  has_many :activities_participants, :dependent => :destroy
   has_many :participants, :through => :activities_participants
   belongs_to :course
   accepts_nested_attributes_for :participants,

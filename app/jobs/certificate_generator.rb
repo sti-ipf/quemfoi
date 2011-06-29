@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
+
 class CertificateGenerator
   @queue = :certificate_generator
   FOR_COURSE = 1

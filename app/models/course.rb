@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
-  has_many :activities
-  has_many :participants
-  has_many :certificates
+  has_many :activities, :dependent => :destroy
+  has_many :participants, :dependent => :destroy
+  has_many :certificates, :dependent => :destroy
 
   validates_presence_of :identifier
 
