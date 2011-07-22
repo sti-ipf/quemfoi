@@ -2,7 +2,7 @@ development:
   adapter: mysql
   encoding: latin1
   reconnect: false
-  database: quemfoi_development
+  database: quemfoi_first_latin
   pool: 5
   username: root
   password: root

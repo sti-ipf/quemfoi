@@ -3,7 +3,6 @@ class Participant < ActiveRecord::Base
   has_many :certificates
   has_many :activities_participants
   has_many :activities, :through => :activities_participants
-  # belongs_to :activity
   def self.get_names
     Participant.all(:select => 'name', :group => 'name').collect {|p| p.name.gsub("'","")}
   end
