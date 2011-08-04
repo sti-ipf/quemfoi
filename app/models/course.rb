@@ -17,7 +17,7 @@ class Course < ActiveRecord::Base
   def start_date
     start_date = nil
     activities.each do |a|
-      start_date = a.start_time if start_date.nil? || a.start_time < start_date
+      start_date = a.date if start_date.nil? || a.date < start_date
     end
     start_date
   end
@@ -25,7 +25,7 @@ class Course < ActiveRecord::Base
   def end_date
     end_date = nil
     activities.each do |a|
-      end_date = a.end_time if end_date.nil? || a.end_time > end_date
+      end_date = a.date if end_date.nil? || a.date > end_date
     end
     end_date
   end
