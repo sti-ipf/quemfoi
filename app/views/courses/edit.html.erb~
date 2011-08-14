@@ -1,6 +1,0 @@
-<h1>Editando Formação</h1>
-
-<%= render :partial => "course/form" %> 
-
-<%= link_to "Voltar para #{@course.identifier}", @course %> |
-<%= link_to 'Voltar para formações', courses_path %>

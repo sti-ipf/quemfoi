@@ -17,8 +17,11 @@ pt_br:
         end_time: Hora de término
         place: Local
         leader: Educador Responsável
+        identificator_number: "Número identificador"
       course:
         identifier: Identificação
+        description: "Descrição"
+        reference_code: "Código de referência"
 
 
     errors:

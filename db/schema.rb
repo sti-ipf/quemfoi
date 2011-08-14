@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110426010640) do
+ActiveRecord::Schema.define(:version => 20110814204557) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20110426010640) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id"
+    t.integer  "identificator_number"
   end
 
   create_table "activities_participants", :id => false, :force => true do |t|
@@ -50,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20110426010640) do
     t.string   "identifier"
     t.text     "description"
     t.boolean  "certificates_generated", :default => false
+    t.integer  "reference_code"
   end
 
   create_table "participants", :force => true do |t|
@@ -60,6 +62,15 @@ ActiveRecord::Schema.define(:version => 20110426010640) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id",  :null => false
+  end
+
+  create_table "tmp_participants", :force => true do |t|
+    t.integer "participant_id"
+    t.integer "course_id"
+    t.string  "unit"
+    t.string  "p_group"
+    t.string  "contact"
+    t.string  "name"
   end
 
 end

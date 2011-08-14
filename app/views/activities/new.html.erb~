@@ -1,5 +1,0 @@
-<h1>Lista de Presença</h1>
-
-<%= render :partial => "activities/form" %> 
-
-<%= link_to 'Voltar', @course %>
