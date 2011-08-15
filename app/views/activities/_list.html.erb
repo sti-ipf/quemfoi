@@ -3,11 +3,13 @@
     <th>Atividade</th>
     <th>Data</th>
     <th>Local</th>
+    <th>Número identificador</th>
   </tr>
 
 <% activities.each do |activity| %>
   <tr>
     <td><%=h activity.name %></td>
+    <td><%=h activity.identificator_number %></td>
     <td><%=l activity.date %></td>
     <td><%=h activity.place %></td>
     <td><%= link_to 'Ver lista', edit_course_activity_path(activity.course_id,activity.id) %></td>

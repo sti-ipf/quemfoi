@@ -3,11 +3,14 @@
 <table>
   <tr>
     <th>Identificação</th>
+    <th>Código de referência</th>
   </tr>
 
 <% @courses.each do |course| %>
   <tr>
     <td><%=h course.identifier %></td>
+    <td><%=h course.reference_code %></td>
+    
     <td><%= link_to 'Ver Atividades', course %></td>
     <td><%= link_to 'Editar', edit_course_path(course) %></td>
     <td><%= button_to 'Apagar', {:action => 'destroy', :id => course.id}, :method => :delete %></td>
