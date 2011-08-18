@@ -9,9 +9,9 @@
 <% activities.each do |activity| %>
   <tr>
     <td><%=h activity.name %></td>
-    <td><%=h activity.identificator_number %></td>
     <td><%=l activity.date %></td>
     <td><%=h activity.place %></td>
+    <td><%=h activity.identificator_number %></td>
     <td><%= link_to 'Ver lista', edit_course_activity_path(activity.course_id,activity.id) %></td>
     <td><%= button_to 'Apagar', {:controller => 'activities', :action => 'destroy', :course_id => activity.course_id, :id => activity.id}, :method => :delete %></td>
   </tr>
