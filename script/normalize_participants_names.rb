@@ -11,24 +11,27 @@ class TmpParticipant < ActiveRecord::Base; end
 def populate_temporary_table_with_complement_info
   TmpParticipant.all.each do |tp|
     tmp_participant_id = tp.id
-    name = tp.name
-    name_splitted = name.split('')
-    participants = Participant.all(:conditions => "name LIKE '#{name_splitted.first}%%#{name_splitted.last}'")
-    update_tmp_participant(participants, tmp_participant_id)
+    participant = Participant.find(tp.participant_id)
+    update_tmp_participant(participant, tmp_participant_id)
   end
 end
 
-def update_tmp_participant(participants, tmp_participant_id)
-  participants.each do |p|
-    if !p.unit.nil?
-      p_unit = remove_apostrophe(p.unit)
-      p.group = remove_apostrophe(p.group)
-      p.contact = remove_apostrophe(p.contact)
-      ActiveRecord::Base.connection.execute("
-        UPDATE tmp_participants SET p_group = '#{p.group}',
-          unit = '#{p_unit}', contact = '#{p.contact}'
-        WHERE id = #{tmp_participant_id}")
+def update_tmp_participant(participant, tmp_participant_id)
+  if !participant.unit.nil?
+    p_unit = remove_apostrophe(participant.unit)
+    p_group = remove_apostrophe(participant.group)
+    p_contact = remove_apostrophe(participant.contact)
+
+    if !p_unit.blank?
+      ActiveRecord::Base.connection.execute("UPDATE tmp_participants SET unit = '#{p_unit}' WHERE id = #{tmp_participant_id}")
     end
+    if !p_contact.blank?
+      ActiveRecord::Base.connection.execute("UPDATE tmp_participants SET contact = '#{p_contact}' WHERE id = #{tmp_participant_id}")
+    end
+    if !p_group.blank?
+      ActiveRecord::Base.connection.execute("UPDATE tmp_participants SET p_group = '#{p_group}' WHERE id = #{tmp_participant_id}")
+    end
+        
   end
 end
 

@@ -2,6 +2,9 @@ class Activity < ActiveRecord::Base
   has_many :activities_participants, :dependent => :destroy
   has_many :participants, :through => :activities_participants
   belongs_to :course
+# old schema
+  # belongs_to :course
+  # has_many :participants
   accepts_nested_attributes_for :participants,
                                 :reject_if => lambda { |a| a[:name].blank? }
 

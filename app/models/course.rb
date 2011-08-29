@@ -2,6 +2,8 @@ class Course < ActiveRecord::Base
   has_many :activities, :dependent => :destroy
   has_many :participants, :dependent => :destroy
   has_many :certificates, :dependent => :destroy
+# old schema
+  # has_many :activities
   validates_presence_of :identifier
 
   scope :certificates_not_generated, where(:certificates_generated => false)

@@ -85,8 +85,6 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @participants = @course.participants_info
     @course_total_time = @course.total_time
-    puts @participants.inspect
-    puts @participants.count
     respond_to do |format|
       format.html
     end

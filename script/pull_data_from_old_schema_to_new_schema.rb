@@ -37,8 +37,7 @@ Course.all.each do |c|
       file.puts "ActivitiesParticipant.create(:activity => activity, :participant => participant)"
     end
   end
-  file.close
-  break
+  
 end
-
+file.close
 

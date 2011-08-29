@@ -64,13 +64,4 @@ ActiveRecord::Schema.define(:version => 20110817202640) do
     t.integer  "course_id",  :null => false
   end
 
-  create_table "tmp_participants", :force => true do |t|
-    t.integer "participant_id"
-    t.integer "course_id"
-    t.string  "unit"
-    t.string  "p_group"
-    t.string  "contact"
-    t.string  "name"
-  end
-
 end
