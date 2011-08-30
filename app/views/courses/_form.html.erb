@@ -1,6 +1,11 @@
 <% form_for(@course) do |f| %>
   <%= render "shared/error_messages", :target => @course %>
   <p>
+    <%= f.label :identifier_to_certificate %>
+    <%= f.text_field :identifier_to_certificate %>
+  </p>
+  
+  <p>
     <%= f.label :identifier %>
     <%= f.text_field :identifier %>
   </p>

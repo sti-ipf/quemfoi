@@ -4,7 +4,11 @@
     <p>
       <%= f.label :name %>
       <%= f.text_field :name %>
-      <%= f.label :identificator_number %><%= f.text_field :identificator_number %>
+      <%= f.label :identificator_number %>
+      <%= f.text_field :identificator_number, :style => 'width: 60px' %>
+      <%= f.label :formation %>
+      <%= f.text_field :formation, :style => 'width: 40px' %>
+      
     </p>
     <p>
       <%= f.label :date %><%= f.date_select :date %>

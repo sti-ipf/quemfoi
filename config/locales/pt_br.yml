@@ -18,10 +18,12 @@ pt_br:
         place: Local
         leader: Educador Responsável
         identificator_number: "Número identificador"
+        formation: "Turma"
       course:
         identifier: Identificação
         description: "Descrição"
         reference_code: "Código de referência"
+        identifier_to_certificate: "Nome de exibição no certificado"
 
 
     errors:
