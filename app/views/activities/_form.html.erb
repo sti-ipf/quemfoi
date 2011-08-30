@@ -21,6 +21,10 @@
       <%= f.label :place %><%= f.text_field :place %>
       <%= f.label :leader %><%= f.text_field :leader %>
     </p>
+    <p>
+      <%= f.label :course_id %>
+      <%= f.select :course_id,  @courses %>
+    </p>
   </div>
   <hr/>
   <div id="attendance_list">

@@ -19,6 +19,7 @@ pt_br:
         leader: Educador Responsável
         identificator_number: "Número identificador"
         formation: "Turma"
+        course_id: "Curso"
       course:
         identifier: Identificação
         description: "Descrição"

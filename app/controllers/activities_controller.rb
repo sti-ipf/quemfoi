@@ -3,6 +3,9 @@ class ActivitiesController < ApplicationController
 
   # GET /activities/new
   # GET /activities/new.xml
+
+  before_filter :load_data, :except => [:index, :show]
+
   def new
     @course = Course.find(params[:course_id])
     @javascript_hash = @course.participants_as_javascript_hash
@@ -66,6 +69,10 @@ class ActivitiesController < ApplicationController
       format.html { redirect_to(course_path(params[:course_id])) }
       format.xml  { head :ok }
     end
+  end
+
+  def load_data
+    @courses = Course.all.collect{|c| [c.identifier, c.id]}
   end
 end
 
