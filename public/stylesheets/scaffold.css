@@ -150,3 +150,10 @@ img#header{ float: left;}
   float: left;
   margin-right: 10px;
 }
+
+.participants_list{
+  float: left;
+  height: 550px;
+  margin: 0 auto;
+  overflow: auto;
+}
