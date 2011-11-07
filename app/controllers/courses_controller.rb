@@ -89,5 +89,9 @@ class CoursesController < ApplicationController
       format.html
     end
   end
+
+  def participants
+    @activities = Course.find(params[:id]).activities
+  end
 end
 

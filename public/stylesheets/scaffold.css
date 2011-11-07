@@ -146,3 +146,7 @@ img#header{ float: left;}
     position: relative;
 }
 
+.activity_participants{
+  float: left;
+  margin-right: 10px;
+}

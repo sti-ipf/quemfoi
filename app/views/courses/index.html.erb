@@ -14,7 +14,7 @@
     <td><%= link_to 'Ver Atividades', course %></td>
     <td><%= link_to 'Editar', edit_course_path(course) %></td>
     <td><%= button_to 'Apagar', {:action => 'destroy', :id => course.id}, :method => :delete %></td>
-    <td><%= link_to 'Relatório de Frequência', participants_status_course_path(course) %></td>
+    <td><%= link_to 'Participantes', participants_path(:id => course.id) %></td>
   </tr>
 <% end %>
 </table>

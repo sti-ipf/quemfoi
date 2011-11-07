@@ -1,0 +1,17 @@
+<% if @activities.count == 0%>
+  O curso não possui atividades.
+<% else %>
+  <% @activities.each do |a| %>
+    <ul class="activity_participants">
+      <div style="padding: 10px 0;">
+        <b><%= a.name %></b>
+      </div>
+
+      <% a.participants.each do |p| %>
+        <li>
+          <%= p.name %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>  
+<% end %>
