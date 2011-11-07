@@ -1,11 +1,14 @@
 <% if @activities.count == 0%>
   O curso não possui atividades.
 <% else %>
+  <% i = 0 %>
   <% @activities.each do |a| %>
+    <% i += 1 %>
     <div class="participants_list">
       <ul class="activity_participants">
-        <div style="padding: 10px 0;">
-          <b><%= a.name %></b>
+        <div style="padding: 10px 0; width: 200px;">
+          <b><%= "#{a.name} - #{i}" %></b>
+          <i><%= link_to 'Editar lista', edit_course_activity_path(a.course_id,a.id) %></i>
         </div>
 
         <% a.participants.each do |p| %>
