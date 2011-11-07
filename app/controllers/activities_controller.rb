@@ -74,5 +74,11 @@ class ActivitiesController < ApplicationController
   def load_data
     @courses = Course.all.collect{|c| [c.identifier, c.id]}
   end
+
+  def update_formation
+    activity = Activity.find(params[:id])
+    activity.formation = params[:formation]
+    activity.save
+  end
 end
 

@@ -8,7 +8,17 @@
       <ul class="activity_participants">
         <div style="padding: 10px 0; width: 200px;">
           <b><%= "#{a.name} - #{i}" %></b>
-          <i><%= link_to 'Editar lista', edit_course_activity_path(a.course_id,a.id) %></i>
+          <%= text_field_tag "formation_#{a.id}", nil, :value => a.formation %>
+          <script>
+            $(document).ready(function() {
+
+              $('#<%="formation_#{a.id}"%>').change(function(){
+                $.ajax({url: "/update_formation/<%=a.id%>",
+                  data: 'formation=' + $('#<%="formation_#{a.id}"%>').val()
+                })
+              });
+            });
+          </script>
         </div>
 
         <% a.participants.each do |p| %>
