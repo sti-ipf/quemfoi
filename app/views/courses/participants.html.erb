@@ -21,7 +21,7 @@
           </script>
         </div>
 
-        <% a.participants.each do |p| %>
+        <% a.participants.all(:order => 'name ASC').each do |p| %>
           <li>
             <%= p.name %>
           </li>
