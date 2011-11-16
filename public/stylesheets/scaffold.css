@@ -152,7 +152,14 @@ img#header{ float: left;}
 
 .participants_list{
   float: left;
-  height: 550px;
+  height: 1200px;
   margin: 0 auto;
   overflow: auto;
+}
+
+#participant_list{
+    float: left;
+    overflow: auto;
+    overflow-y: hidden;
+    width: 10000px;
 }

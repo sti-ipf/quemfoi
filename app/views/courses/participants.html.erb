@@ -1,32 +1,40 @@
-<% if @activities.count == 0%>
-  O curso não possui atividades.
-<% else %>
-  <% i = 0 %>
-  <% @activities.each do |a| %>
-    <% i += 1 %>
-    <div class="participants_list">
-      <ul class="activity_participants">
-        <div style="padding: 10px 0; width: 200px;">
-          <b><%= "#{a.name} - #{i}" %></b>
-          <%= text_field_tag "formation_#{a.id}", nil, :value => a.formation %>
-          <script>
-            $(document).ready(function() {
+<div id="participant_list">
+  <% if @activities.count == 0%>
+    O curso não possui atividades.
+  <% else %>
+    <% i = 0 %>
+    <% @activities.each do |a| %>
+      <% i += 1 %>
+      <div class="participants_list">
+        <ul class="activity_participants">
+          <div style="padding: 10px 0; width: 200px;">
+            <b><%= "#{a.name} - #{i}" %></b>
+            <%= text_field_tag "formation_#{a.id}", nil, :value => a.formation %>
+            <br>
+            <%= "<b>Data:</b> #{a.date.try(:strftime, '%d/%m/%Y')}".html_safe %>
+            <br>
+            <%= "<b>Local:</b> #{a.place}".html_safe %>
+            <br>
+            <%= "<b>Educador:</b> #{a.leader}".html_safe %>
+            <script>
+              $(document).ready(function() {
 
-              $('#<%="formation_#{a.id}"%>').change(function(){
-                $.ajax({url: "/update_formation/<%=a.id%>",
-                  data: 'formation=' + $('#<%="formation_#{a.id}"%>').val()
-                })
+                $('#<%="formation_#{a.id}"%>').change(function(){
+                  $.ajax({url: "/update_formation/<%=a.id%>",
+                    data: 'formation=' + $('#<%="formation_#{a.id}"%>').val()
+                  })
+                });
               });
-            });
-          </script>
-        </div>
+            </script>
+          </div>
 
-        <% a.participants.all(:order => 'name ASC').each do |p| %>
-          <li>
-            <%= p.name %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>  
-<% end %>
+          <% a.participants.all(:order => 'name ASC').each do |p| %>
+            <li>
+              <%= p.name %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>  
+  <% end %>
+</div>
