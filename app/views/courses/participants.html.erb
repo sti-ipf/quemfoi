@@ -13,6 +13,10 @@
             <br>
             <%= "<b>Data:</b> #{a.date.try(:strftime, '%d/%m/%Y')}".html_safe %>
             <br>
+            <%= "<b>Horário início:</b> #{a.start_time.try(:strftime, '%H:%M')}".html_safe %>
+            <br>
+            <%= "<b>Horário término:</b> #{a.end_time.try(:strftime, '%H:%M')}".html_safe %>
+            <br>
             <%= "<b>Local:</b> #{a.place}".html_safe %>
             <br>
             <%= "<b>Educador:</b> #{a.leader}".html_safe %>
