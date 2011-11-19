@@ -163,3 +163,12 @@ img#header{ float: left;}
     overflow-y: hidden;
     width: 10000px;
 }
+
+.participant_list_field{
+  width: 40px;
+  margin-left:5px;
+}
+
+.formation_field{
+  width: 40px; 
+}

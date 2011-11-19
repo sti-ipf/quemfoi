@@ -20,6 +20,7 @@ Quemfoi::Application.routes.draw do
   match 'certificates/update_course' => 'certificates#update_course', :as => :certificate_update_course
   match ':id/participants' => 'courses#participants', :as => :participants
   match 'update_formation/:id' => 'activities#update_formation', :as => :update_formation
+  match 'update_list/:id' => 'courses#update_list', :as => :update_list
   resources :certificates, :only => [ :index]
 
   #root :to => 'certificates#index'

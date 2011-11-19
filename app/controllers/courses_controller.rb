@@ -93,5 +93,11 @@ class CoursesController < ApplicationController
   def participants
     @activities = Course.find(params[:id]).activities
   end
+
+  def update_list
+    participant = Participant.find(params[:id])
+    participant.list = params[:list]
+    participant.save
+  end
 end
 

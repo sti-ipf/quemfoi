@@ -9,7 +9,7 @@
         <ul class="activity_participants">
           <div style="padding: 10px 0; width: 200px;">
             <b><%= "#{a.name} - #{i}" %></b>
-            <%= text_field_tag "formation_#{a.id}", nil, :value => a.formation %>
+            <%= text_field_tag "formation_#{a.id}", nil, :value => a.formation, :class => "formation_field" %>
             <br>
             <%= "<b>Data:</b> #{a.date.try(:strftime, '%d/%m/%Y')}".html_safe %>
             <br>
@@ -35,7 +35,18 @@
           <% a.participants.all(:order => 'name ASC').each do |p| %>
             <li>
               <%= p.name %>
+              <%= text_field_tag "list_#{p.id}", nil, :value => p.list, :class => "participant_list_field" %>
             </li>
+            <script>
+              $(document).ready(function() {
+
+                $('#<%="list_#{p.id}"%>').change(function(){
+                  $.ajax({url: "/update_list/<%=p.id%>",
+                    data: 'list=' + $('#<%="list_#{p.id}"%>').val()
+                  })
+                });
+              });
+            </script>
           <% end %>
         </ul>
       </div>
