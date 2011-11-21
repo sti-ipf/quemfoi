@@ -165,10 +165,10 @@ img#header{ float: left;}
 }
 
 .participant_list_field{
-  width: 40px;
+  width: 80px;
   margin-left:5px;
 }
 
 .formation_field{
-  width: 40px; 
+  width: 0px; 
 }
