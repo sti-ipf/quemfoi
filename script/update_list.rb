@@ -5,7 +5,7 @@ Participant.all.each do |p|
   p.activities.collect(&:identificator_number).each do |f|
     if !f.blank?
       number = f.gsub(' ', '')
-      formation_numbers << number !formation_numbers.include?(number)
+      formation_numbers << number if !formation_numbers.include?(number)
     end
   end
   p.list = formation_numbers.join(" ")
