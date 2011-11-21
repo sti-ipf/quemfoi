@@ -35,7 +35,7 @@
           <% a.participants.all(:order => 'name ASC').each do |p| %>
             <li>
               <%= p.name %>
-              <%= text_field_tag "list_#{p.id}", nil, :value => p.list, :class => "participant_list_field" %>
+              <%= text_field_tag "list_#{p.id}", nil, :value => p.activities_numbers(@activities_numbers), :class => "participant_list_field" %>
             </li>
             <script>
               $(document).ready(function() {

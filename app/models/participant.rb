@@ -46,5 +46,13 @@ class Participant < ActiveRecord::Base
     participant_total_time
   end
 
+  def activities_numbers(an)
+    numbers = []
+    an.each do |n|
+      numbers << n if self.list.include?(n.to_s)
+    end
+    return numbers.join(" ")
+  end
+
 end
 

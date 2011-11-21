@@ -92,6 +92,7 @@ class CoursesController < ApplicationController
 
   def participants
     @activities = Course.find(params[:id]).activities
+    @activities_numbers = @activities.collect(&:identificator_number)
   end
 
   def update_list
