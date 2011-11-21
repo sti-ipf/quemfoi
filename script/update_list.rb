@@ -5,7 +5,7 @@ require File.dirname(__FILE__)+'/../config/environment'
 
 Participant.all.each do |p|
   formation_numbers = []
-  p.activities.collect(&:formation).each do |f|
+  p.activities.collect(&:identificator_number).each do |f|
     formation_numbers << f if !f.blank?
   end
   p.list = formation_numbers.join(", ")
