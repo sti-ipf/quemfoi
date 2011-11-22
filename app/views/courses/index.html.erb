@@ -4,17 +4,19 @@
   <tr>
     <th>Identificação</th>
     <th>Código de referência</th>
+    <th>Total de horas</th>
   </tr>
 
 <% @courses.each do |course| %>
   <tr>
     <td><%=h course.identifier %></td>
     <td><%=h course.reference_code %></td>
+    <td><%=h course.total_hours %></td>
     
-    <td><%= link_to 'Ver Atividades', course %></td>
-    <td><%= link_to 'Editar', edit_course_path(course) %></td>
-    <td><%= button_to 'Apagar', {:action => 'destroy', :id => course.id}, :method => :delete %></td>
-    <td><%= link_to 'Participantes', participants_path(:id => course.id) %></td>
+    <td style="padding-left: 10px;"><%= link_to 'Ver Atividades', course %></td>
+    <td style="padding-left: 10px;"><%= link_to 'Editar', edit_course_path(course) %></td>
+    <td style="padding-left: 10px;"><%= button_to 'Apagar', {:action => 'destroy', :id => course.id}, :method => :delete %></td>
+    <td style="padding-left: 10px;"><%= link_to 'Participantes', participants_path(:id => course.id) %></td>
   </tr>
 <% end %>
 </table>

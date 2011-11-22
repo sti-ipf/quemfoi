@@ -25,6 +25,7 @@ pt_br:
         description: "Descrição"
         reference_code: "Código de referência"
         identifier_to_certificate: "Nome de exibição no certificado"
+        total_hours: "Total de horas"
 
 
     errors:

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111118204320) do
+ActiveRecord::Schema.define(:version => 20111122193957) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -54,6 +54,25 @@ ActiveRecord::Schema.define(:version => 20111118204320) do
     t.boolean  "certificates_generated",    :default => false
     t.string   "reference_code"
     t.text     "identifier_to_certificate"
+    t.float    "total_hours"
+  end
+
+  create_table "new_data", :force => true do |t|
+    t.integer "numero"
+    t.string  "nome"
+    t.string  "segmento"
+    t.string  "unidade"
+    t.string  "contato"
+    t.integer "course_id"
+  end
+
+  create_table "new_data2", :force => true do |t|
+    t.integer "numero"
+    t.string  "nome"
+    t.string  "segmento"
+    t.string  "unidade"
+    t.string  "contato"
+    t.integer "course_id"
   end
 
   create_table "participants", :force => true do |t|
