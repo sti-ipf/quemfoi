@@ -92,7 +92,12 @@ class CoursesController < ApplicationController
 
   def participants
     @activities = Course.find(params[:id]).activities
-    @activities_numbers = @activities.collect(&:identificator_number)
+    @activities_numbers = []
+    @activities.each do |a|
+      if !a.identificator_number.nil?
+        @activities_numbers << a.identificator_number.gsub(' ', '')
+      end
+    end
   end
 
   def update_list
