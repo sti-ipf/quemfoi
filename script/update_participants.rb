@@ -4,6 +4,6 @@ end
 
 NewData.all.each do |d|
   @participant = Participant.first(:conditions => "id = #{d.numero}")
-  nex if @participant.nil?
+  next if @participant.nil?
   @participant.update_attributes(:name => d.nome, :group => d.segmento, :unit => d.unidade, :contact => d.contato)
 end
