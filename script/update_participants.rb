@@ -3,7 +3,7 @@ class NewData < ActiveRecord::Base
 end
 
 NewData.all.each do |d|
-  @participant = Participant.find(d.numero)
+  @participant = Participant.first(:conditions => "id = #{d.numero}")
   nex if @participant.nil?
   @participant.update_attributes(:name => d.nome, :group => d.segmento, :unit => d.unidade, :contact => d.contato)
 end
