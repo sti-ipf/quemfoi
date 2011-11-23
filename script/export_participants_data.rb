@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 
-courses = Participant.find_by_sql("
+participants = Participant.find_by_sql("
 select p.id, name, 'group', unit, contact,course_id, c.identifier from participants p 
 inner join courses c on c.id = p.course_id where c.id > 40
 ")
