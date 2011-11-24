@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 
 participants = Participant.find_by_sql("
-select p.id, name, 'group', unit, contact,course_id, c.identifier from participants p 
+select p.id, name, `group`, unit, contact,course_id, c.identifier from participants p 
 inner join courses c on c.id = p.course_id where c.id > 40
 ")
 file_name = 'participants'
