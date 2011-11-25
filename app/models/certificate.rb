@@ -13,7 +13,7 @@ private
   def fill_with_data
     course_description = format_course_description
     @pdf_file.draw_text participant.name, :at => [157,316], :size => 12
-    @pdf_file.draw_text course.identifier, :at => [50,294], :size => 12
+    @pdf_file.draw_text course.identifier_to_certificate, :at => [50,294], :size => 12
     @pdf_file.draw_text period, :at => [220,252], :size => 12
     @pdf_file.draw_text total_hours, :at => [547,252], :size => 12
     @pdf_file.draw_text frequency, :at => [678,252], :size => 12

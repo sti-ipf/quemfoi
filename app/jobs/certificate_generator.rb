@@ -14,40 +14,21 @@ class CertificateGenerator
 
 private
 
-  def self.for_course(course_id, info)
-    info.log "Iniciada geração dos certificados para o curso com id #{course_id}"
-    course = Course.find(course_id)
-    course_total_time = course.total_time
-    participants = course.participants_info
-    directory = "#{RAILS_ROOT}/public/certificates/#{course_id}"
-    Dir.mkdir(directory) if !File.directory?(directory)
-    participants.each do |participants_info|
-      participant = participants_info[0]
-      next if participant.certificates.count > 0
-      frequency = calc_frequency(participants_info[1], course_total_time)
-      file_name = "#{course_id}_#{clean_string(participant.name)}.pdf"
-      create_certificate_for_participant(:participant => participant, :course => course,
-        :course_total_time => course_total_time, :frequency => frequency, :file_name => file_name)
-    end
-    course.certificates_generated = true
-    course.save
-    info.log "Finalizada geração dos certificados para o curso com id #{course_id}"
-  end
-
   def self.for_participant(participant_id, info)
     participant = Participant.find(participant_id)
     info.log "Iniciada geração do certificado para o participante com id #{participant.id}"
     participant.certificates {|c| c.destroy}
     course = participant.course
-    course_total_time = course.total_time
-    frequency = calc_frequency(participant.total_time, course_total_time)
+    directory = "#{RAILS_ROOT}/public/certificates/#{course.id}"
+    Dir.mkdir(directory) if !File.directory?(directory)
+    frequency = participant.frequency
     file_name = "#{course.id}_#{clean_string(participant.name)}.pdf"
     certificate = create_certificate_for_participant(:participant => participant, :course => course,
-      :course_total_time => course_total_time, :frequency => frequency, :file_name => file_name)
+      :course_total_time => course.total_hours, :frequency => frequency, :file_name => file_name)
     info.log "Finalizada geração do certificado para o participante com id #{participant.id}"
     info.log "O certificado foi gerado em: #{RAILS_ROOT}/public/certificates/#{course.id}/#{file_name}"
-    puts is_email?(participant.contact)
-    Resque.enqueue(CertificateSender,certificate.id, 'ffc.fabricio@gmail.com', false) if is_email?('ffc.fabricio@gmail.com')
+    #puts is_email?(participant.contact)
+    #Resque.enqueue(CertificateSender,certificate.id, 'ffc.fabricio@gmail.com', false) if is_email?('ffc.fabricio@gmail.com')
   end
 
   def self.create_certificate_for_participant(params={})

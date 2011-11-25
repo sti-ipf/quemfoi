@@ -54,5 +54,23 @@ class Participant < ActiveRecord::Base
     return numbers.join(" ")
   end
 
+  def frequency
+    course = Course.find(self.course_id)
+    participations = ActivitiesParticipant.all(:conditions => "participant_id = #{self.id}")
+    activities_id = participations.collect(&:activity_id).join(',')
+    activities = Activity.all(:conditions => "id IN (#{activities_id})")
+    activities_time = 0
+    activities.each do |a|
+      activities_time += a.duration
+    end
+
+    percentage = (activities_time * 100)/course.total_hours
+    if percentage > 100
+      100
+    else
+      percentage
+    end
+  end
+
 end
 
