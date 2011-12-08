@@ -18,6 +18,12 @@ class CoursesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @course }
+      format.csv do
+        @activities = Activity.to_csv_file(@course.activities)
+        @filename = 'atividades.csv'
+        @output_encoding = 'UTF-8'
+      end
+    
     end
   end
 
@@ -98,6 +104,7 @@ class CoursesController < ApplicationController
         @activities_numbers << a.identificator_number.gsub(' ', '')
       end
     end
+
   end
 
   def update_list

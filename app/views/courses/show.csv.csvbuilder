@@ -1,0 +1,9 @@
+header = [
+"ID", "Atividade", "Data", "Local", "NI"
+]
+
+csv << header
+@activities.each do |a|
+  csv << a
+end
+

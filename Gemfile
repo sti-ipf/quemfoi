@@ -21,4 +21,4 @@ gem 'levenshtein'
 gem 'rcov'
 gem 'rspec-rails'
 gem 'fastercsv'
-
+gem 'csv_builder'
