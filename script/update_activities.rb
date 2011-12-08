@@ -15,5 +15,5 @@ FasterCSV.foreach('tmp/atividades.csv') do |row|
     
   end
   
-  activity.update_attributes(:name => row[2], :identificator_number => row.last) if !activity.nil?
+  activity.update_attributes(:name => row[0], :place => row[1], :identificator_number => row.last) if !activity.nil?
 end
