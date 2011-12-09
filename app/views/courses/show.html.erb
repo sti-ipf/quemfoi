@@ -1,4 +1,6 @@
-<h2><%=h @course.identifier %><span style="font-size: 10px;"><%= link_to 'Editar', edit_course_path(@course) %></span></h2>
+<h2><%= "#{@course.identifier} <i>#{@course.reference_code}</i> ".html_safe %>
+  <span style="font-size: 10px;"><%= link_to 'Editar', edit_course_path(@course) %></span>
+</h2>
 <%= link_to 'Exportar', "#{request.url}.csv" %>
 <%= render :partial => "activities/list", :locals => { :activities => @course.activities } %>
 <%= link_to 'Nova Lista de Presença', new_course_activity_path(@course) %> |
