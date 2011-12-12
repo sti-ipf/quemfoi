@@ -36,7 +36,6 @@
             <li>
               <%= p.name %>
               <%= text_field_tag "list_#{p.id}", nil, :value => p.activities_numbers(@activities_numbers), :class => "participant_list_field" %>
-              <%= p.course_id%>
             </li>
             <script>
               $(document).ready(function() {

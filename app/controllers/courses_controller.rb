@@ -97,7 +97,8 @@ class CoursesController < ApplicationController
   end
 
   def participants
-    @activities = Course.find(params[:id]).activities
+    @course = Course.find(params[:id])
+    @activities = Activity.all(:conditions => "course_id = #{@course.id}")
     @activities_numbers = []
     @activities.each do |a|
       if !a.identificator_number.nil?
