@@ -104,7 +104,16 @@ class CoursesController < ApplicationController
         @activities_numbers << a.identificator_number.gsub(' ', '')
       end
     end
-
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @activities }
+      format.csv do
+        @activities = Activity.to_csv_file(@activities)
+        @filename = 'atividades.csv'
+        @output_encoding = 'UTF-8'
+      end
+    
+    end
   end
 
   def update_list
