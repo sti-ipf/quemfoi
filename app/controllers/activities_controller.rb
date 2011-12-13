@@ -30,12 +30,15 @@ class ActivitiesController < ApplicationController
   def create
     @course = Course.find(params[:course_id])
     @activity = @course.activities.build(params[:activity])
-#    @activity.participants.each {|p| p.course_id = @course.id }
+    @participants = @activity.participants.collect
+    @activity.participants = []
     respond_to do |format|
       if @activity.save
+        save_participants
         format.html { redirect_to( course_path(params[:course_id]), :notice => 'Lista de presença salva com sucesso') }
         format.xml  { render :xml => @activity, :status => :created, :location => @activity }
       else
+        @javascript_hash = @course.participants_as_javascript_hash
         80.times { @activity.participants.build }
         format.html { render :action => "new" }
         format.xml  { render :xml => @activity.errors, :status => :unprocessable_entity }
@@ -79,6 +82,27 @@ class ActivitiesController < ApplicationController
     activity = Activity.find(params[:id])
     activity.formation = params[:formation]
     activity.save
+  end
+
+  def save_participants
+    @participants.each do |p|
+      participant = Participant.first(:conditions => {:name => p.name, :contact => p.contact, :course_id => p.course_id})
+      if participant.nil?
+puts "-" * 100
+        puts Participant.count
+        puts "-" * 100
+        p = Participant.create(p.attributes)
+        puts "-" * 100
+        puts Participant.count
+        puts "-" * 100
+        ActivitiesParticipant.create(:activity_id => @activity.id, :participant_id => p.id)
+      else
+        ActivitiesParticipant.create(:activity_id => @activity.id, :participant_id => participant.id)
+      end
+      puts "-" * 100
+        puts Participant.count
+        puts "-" * 100
+    end
   end
 end
 
