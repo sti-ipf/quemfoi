@@ -2,5 +2,7 @@
 
 <%= render :partial => "courses/form" %> 
 
-<%= link_to "Voltar para #{@course.identifier}", @course %> |
-<%= link_to 'Voltar para formações', courses_path %>
+<%= link_to 'Voltar para formações', courses_path, :class => "back_link"  %>
+</br>
+<%= link_to "Voltar para #{@course.identifier}", @course, :class => "back_link"  %>
+

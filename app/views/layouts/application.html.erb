@@ -6,15 +6,20 @@
   <%= javascript_include_tag 'jquery/jquery-1.4.2.min.js' %>
   <%= javascript_include_tag 'jquery/jquery.autocomplete.js' %>
   <%= javascript_include_tag 'jquery-rails.js' %>
+  <%= javascript_include_tag 'jquery-ui-1.8.16.custom.min.js' %>
+  <%= javascript_include_tag 'jquery.dataTables.min.js' %>
+  
   <%= csrf_meta_tag %>
 </head>
 <body>
-
-<p style="color: green"><%= notice %></p>
-<p class="alert"><%= flash[:alert] %></p>
-
-<%= yield %>
-
+  <p style="color: green"><%= notice %></p>
+  <p class="alert"><%= flash[:alert] %></p>
+  <div class="wrapper">
+    <div class="white-box">
+      <%= yield %>
+      <div class="clearfix"></div>
+    </div>
+  </div>
 </body>
 </html>
 

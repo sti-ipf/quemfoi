@@ -49,7 +49,9 @@ class Participant < ActiveRecord::Base
   def activities_numbers(an)
     numbers = []
     an.each do |n|
-      numbers << n if self.list.include?(n.to_s)
+      if !self.list.nil?
+        numbers << n if self.list.include?(n.to_s)
+      end
     end
     return numbers.join(" ")
   end

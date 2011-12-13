@@ -1,3 +1,4 @@
+<div id ="presence_list">
 <% form_for [@course,@activity] do |f| %>
   <%= render "shared/error_messages", :target => @activity %>
   <div id="header">
@@ -10,6 +11,7 @@
       <%= f.text_field :formation, :style => 'width: 40px' %>
       
     </p>
+    </br>
     <p>
       <%= f.label :date %><%= f.date_select :date %>
 
@@ -17,14 +19,17 @@
 
       <%= f.label :end_time %><%= f.time_select :end_time %>
     </p>
+    </br>
     <p>
       <%= f.label :place %><%= f.text_field :place %>
       <%= f.label :leader %><%= f.text_field :leader %>
     </p>
+    </br>
     <p>
       <%= f.label :course_id %>
       <%= f.select :course_id,  @courses %>
     </p>
+    </br>
   </div>
   <hr/>
   <div id="attendance_list">
@@ -44,6 +49,8 @@
       <%= f.submit 'Salvar' %>
     </p>
 <% end %>
+
+</div>
 <script>
  $(document).ready(function() {
 

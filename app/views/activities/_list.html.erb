@@ -1,20 +1,59 @@
-<table>
-  <tr>
-    <th>Atividade</th>
-    <th>Data</th>
-    <th>Local</th>
-    <th>Número identificador</th>
-  </tr>
+<script>
 
-<% activities.each do |activity| %>
-  <tr>
-    <td><%=h activity.name %></td>
-    <td><%=l activity.date %></td>
-    <td><%=h activity.place %></td>
-    <td><%=h activity.identificator_number %></td>
-    <td><%= link_to 'Ver lista', edit_course_activity_path(activity.course_id,activity.id) %></td>
-    <td><%= button_to 'Apagar', {:controller => 'activities', :action => 'destroy', :course_id => activity.course_id, :id => activity.id}, :method => :delete %></td>
-  </tr>
-<% end %>
+  $(document).ready(function(){
+    var oTable = $('.list').dataTable({
+      "iDisplayLength": -1,
+      "bAutoWidth": false,
+      "bJQueryUI": true,
+      "bSort": true,
+      "sDom": '<"H"lTfr>t<"F"ip>',
+      "oTableTools": {
+         "sSwfPath": "DataTables-1.8.1/media/swf/copy_cvs_xls_pdf.swf"
+      },
+      "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 4, 5] }],
+        'oLanguage': {
+          'oPaginate': {
+            'sFirst': 'primeira',
+            'sLast': 'ultima',
+            'sNext': 'próxima',
+            'sPrevious': 'anterior'
+          },
+          'sInfo': 'exibindo de _START_ até _END_ do total de _TOTAL_ registros',          
+          'sInfoEmpty': "Mostrando de 0 até 0 de 0 registros",
+          'sEmptyTable': 'não há registros para exibir',
+          'sInfoFiltered': '- filtrando de _MAX_ registros',
+          'sInfoPostFix': '',
+          'sLengthMenu': 'exibe _MENU_ registros',
+          'sProcessing': 'processando',
+          'sSearch': 'filtrar',
+          'sZeroRecords': 'não há registros para exibir'
+        }
+    });
+  });
+</script>
+
+<table class="list">
+  <thead>
+    <tr>
+      <th>Atividade</th>
+      <th>Data</th>
+      <th>Local</th>
+      <th>Número identificador</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% activities.each do |activity| %>
+      <tr>
+        <td><%=h activity.name %></td>
+        <td><%=l activity.date %></td>
+        <td><%=h activity.place %></td>
+        <td><%=h activity.identificator_number %></td>
+        <td><%= link_to 'Ver lista', edit_course_activity_path(activity.course_id,activity.id) %></td>
+        <td><%= button_to 'Apagar', {:controller => 'activities', :action => 'destroy', :course_id => activity.course_id, :id => activity.id}, :method => :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
