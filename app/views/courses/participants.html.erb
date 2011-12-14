@@ -8,7 +8,7 @@
       <div class="participants_list">
         <ul class="activity_participants">
           <div style="padding: 10px 0; width: 200px;">
-            <b><%= "#{a.name} - #{i}" %></b>
+            <b><%= "#{a.name} - #{a.identificator_number}" %></b>
             <%= text_field_tag "formation_#{a.id}", nil, :value => a.formation, :class => "formation_field" %>
             <br>
             <%= "<b>Data:</b> #{a.date.try(:strftime, '%d/%m/%Y')}".html_safe %>
