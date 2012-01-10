@@ -9,8 +9,8 @@ file_name = 'atividades'
 data = []
 activities.each do |a|
   data << [
-    a.reference_code, a.identifier, a.name, a.identificator_number, a.date.strftime("%d/%m/%Y"), 
-    a.start_time.strftime("%d/%m/%Y"),  a.end_time.strftime("%d/%m/%Y"), a.place, a.leader
+    a.reference_code, a.identifier, a.name, a.identificator_number, a.date.strftime("%d/%m/%Y %H:%m"), 
+    a.start_time.strftime("%d/%m/%Y %H:%m"),  a.end_time.strftime("%d/%m/%Y %H:%m"), a.place, a.leader
     ]
 
 
