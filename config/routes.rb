@@ -21,12 +21,12 @@ Quemfoi::Application.routes.draw do
   match ':id/participants' => 'courses#participants', :as => :participants
   match 'update_formation/:id' => 'activities#update_formation', :as => :update_formation
   match 'update_list/:id' => 'courses#update_list', :as => :update_list
-  resources :certificates, :only => [ :index]
 
   #root :to => 'certificates#index'
   root :to => 'courses#index'
   resources :courses  do
     resources :activities, :except => [ :index, :show ]
+    resources :certificates, :only => [ :index, :show ]
     member do
       get 'participants_status'
     end

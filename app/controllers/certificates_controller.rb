@@ -1,9 +1,24 @@
 class CertificatesController < ApplicationController
 
-  layout 'certicate'
-
   def index
-    @participants = Participant.get_names
+    @course = Course.find(params[:course_id])
+    @reference_code = @course.reference_code.gsub(' ', '').gsub('(', '').gsub(')', '')
+    @certificates = Certificate.all(:conditions => "course_id = #{params[:course_id]}", :include => [:participant])
+    @approved_total = 0
+    @disapproved_total = 0
+    @almost_total = 0
+    @certificates.each do |c|
+      
+      if c.frequency >= 75
+        @approved_total += 1 
+      else
+        @disapproved_total += 1
+      end
+
+      if c.frequency >= 60 && c.frequency < 75
+        @almost_total += 1
+      end
+    end
   end
 
   def search

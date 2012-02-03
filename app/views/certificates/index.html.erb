@@ -1,2 +1,73 @@
-<%= render :partial => "search_bar", :locals => {:participants => @participants} %>
+<script>
+
+  $(document).ready(function(){
+    var oTable = $('.list').dataTable({
+      "iDisplayLength": -1,
+      "bAutoWidth": false,
+      "bJQueryUI": true,
+      "bSort": true,
+      "sDom": '<"H"lTfr>t<"F"ip>',
+      "oTableTools": {
+         "sSwfPath": "DataTables-1.8.1/media/swf/copy_cvs_xls_pdf.swf"
+      },
+      "aaSorting": [[1,'desc'], [0,'asc']],
+      "aoColumnDefs": [ { "bSortable": false, "aTargets": [] }],
+        'oLanguage': {
+          'oPaginate': {
+            'sFirst': 'primeira',
+            'sLast': 'ultima',
+            'sNext': 'próxima',
+            'sPrevious': 'anterior'
+          },
+          'sInfo': 'exibindo de _START_ até _END_ do total de _TOTAL_ registros',          
+          'sInfoEmpty': "Mostrando de 0 até 0 de 0 registros",
+          'sEmptyTable': 'não há registros para exibir',
+          'sInfoFiltered': '- filtrando de _MAX_ registros',
+          'sInfoPostFix': '',
+          'sLengthMenu': 'exibe _MENU_ registros',
+          'sProcessing': 'processando',
+          'sSearch': 'filtrar',
+          'sZeroRecords': 'não há registros para exibir'
+        }
+    });
+  });
+</script>
+
+<h1><%= "Certificados do curso <i>#{@course.reference_code}</i>".html_safe %></h1>
+<br>
+
+<div style="float:lef">
+  <%= "<b>Total de aprovados:</b> #{@approved_total}".html_safe %>&nbsp;
+  <%= "<b>Total de reprovados:</b> #{@disapproved_total}".html_safe %>&nbsp;
+  <%= "<b>Total entre 60% e 74%:</b> #{@almost_total}".html_safe %>
+</div>
+
+<div style="float:right">
+  <%= link_to 'Exportar', "/dados_dos_certificados_#{@reference_code}.csv" %>
+</div>
+
+<table class="list">
+  <thead>
+    <tr>
+      <th>Participante</th>
+      <th>Porcentagem de Frequência</th>
+      <th>Total de horas</th>
+      <th>Carga horária do curso</th>
+    </tr>
+  </thead>
+    <tbody>
+    <% @certificates.each do |certificate| %>
+      <tr>
+        <td><%=h certificate.participant.name %></td>
+        <td><%=h "#{certificate.frequency}%" %></td>
+        <td><%=h certificate.total_hours %></td>
+        <td><%=h certificate.course_total_hours %></td>  
+      </tr>
+    <% end %>
+  <tbody>
+</table>
+
+<br />
+
+
 
