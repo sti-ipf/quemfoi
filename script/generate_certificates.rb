@@ -1,6 +1,6 @@
 Certificate.delete_all
 
-courses = Course.all(:conditions => "id IN (32, 3, 1, 2, 15, 17, 16, 11, 22)")
+courses = Course.all
 
 courses.each do |course|
   participants = Participant.all(:conditions => "course_id = #{course.id}")

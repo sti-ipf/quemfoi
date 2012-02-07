@@ -60,7 +60,7 @@
         <% if [32, 3, 1, 2, 15, 17, 16, 11, 22].include?(course.id) %>
           <td style="padding-left: 10px;"><%= link_to 'Dados dos certificados', course_certificates_path(:course_id => course.id) %></td>
         <%else%>
-          <td></td>
+          <td style="padding-left: 10px;"><%= link_to 'Dados dos certificados', course_certificates_path(:course_id => course.id) %></td>
         <%end%>
         <td style="padding-left: 10px;"><%= link_to 'Ver Atividades', course %></td>
         <td style="padding-left: 10px;"><%= link_to 'Participantes', participants_path(:id => course.id) %></td>
