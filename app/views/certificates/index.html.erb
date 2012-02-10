@@ -50,7 +50,7 @@
   <thead>
     <tr>
       <th>Participante</th>
-      <th>Porcentagem de Frequência</th>
+      <th>Porcentagem de Frequência (%)</th>
       <th>Total de horas</th>
       <th>Carga horária do curso</th>
     </tr>
@@ -59,7 +59,7 @@
     <% @certificates.each do |certificate| %>
       <tr>
         <td><%=h certificate.participant.name %></td>
-        <td><%=h "#{certificate.frequency}%" %></td>
+        <td><%=h certificate.frequency %></td>
         <td><%=h certificate.total_hours %></td>
         <td><%=h certificate.course_total_hours %></td>  
       </tr>
