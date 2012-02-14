@@ -24,6 +24,8 @@ courses.each do |course|
     duration += a.duration
   end
 
+  duration = course.total_hours if !course.total_hours.blank?
+
   data = []
   export_data = []
   participants.each do |p|
