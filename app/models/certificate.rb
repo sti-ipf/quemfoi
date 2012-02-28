@@ -8,6 +8,10 @@ class Certificate < ActiveRecord::Base
     @pdf_file.render_file(file_path)
   end
 
+  def period
+    "#{self.course.start_date.try(:strftime, '%d/%m/%Y')} - #{self.course.end_date.try(:strftime, '%d/%m/%Y')}"
+  end
+
 private
 
   def fill_with_data

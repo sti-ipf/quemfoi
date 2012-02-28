@@ -4,9 +4,12 @@ courses = Course.all
 
 courses.each do |course|
   participants = Participant.all(:conditions => "course_id = #{course.id}")
-  activities_ids = course.activities.collect(&:id).join(',')
+  activities_ids = Activity.all(:conditions => "formation not like '%Reuni%' AND course_id = #{course.id}").collect(&:id).join(',')
+  puts course.id
+  puts activities_ids.inspect
   activities_total = 0
   participant = nil
+  next if activities_ids.blank?
   participants.each do |p|
     participant_total_activities = ActivitiesParticipant.all(:conditions => "activity_id IN (#{activities_ids}) AND participant_id = #{p.id}").count
     
@@ -30,6 +33,7 @@ courses.each do |course|
   export_data = []
   participants.each do |p|
     a = ActivitiesParticipant.all(:conditions => "activity_id IN (#{activities_ids}) AND participant_id = #{p.id}").collect(&:activity_id)
+    next if a.count == 0
     activities = Activity.all(:conditions => "id IN (#{a.join(',')})")
     hours = 0
     activities.each do |a|
