@@ -28,11 +28,11 @@
 #   end
 # end
 
-certificates = Certificate.all(:conditions => "frequency >= 75")
+certificates = Certificate.all(:conditions => "frequency >= 75 and course_id IN (select id from courses where id <= 36)")
 participant_ids = certificates.collect(&:participant_id).join(',')
 #schools = Participant.all(:select => "DISTINCT unit", :conditions => "id IN (#{participant_ids})")
 
-
+puts certificates.count
 all_data = []
 data = []
 i = 1
@@ -52,7 +52,43 @@ i = 1
 puts all_data.count
 all_data.each do |data|
 
-  FasterCSV.open("tmp/#{file_name*i}.csv", "w") do |csv|
+  FasterCSV.open("tmp/2009-2010-#{file_name*i}.csv", "w") do |csv|
+    csv << ["Nome do participante", "Titulo de exibição no certificado",
+      "Período", "Carga Horária", "Porcentagem de Frequência", "Total de horas do curso", "Ementa", "Escola"]
+    data.each do |d|
+      csv << d
+    end
+  end
+
+  i += 1
+
+end
+
+certificates = Certificate.all(:conditions => "frequency >= 75 and course_id IN (select id from courses where id > 37)")
+participant_ids = certificates.collect(&:participant_id).join(',')
+#schools = Participant.all(:select => "DISTINCT unit", :conditions => "id IN (#{participant_ids})")
+
+puts certificates.count
+all_data = []
+data = []
+i = 1
+certificates.each do |c|
+  data << [c.participant.name, c.course.identifier_to_certificate, c.period, c.total_hours,
+    c.frequency, c.course_total_hours, c.course.description, c.participant.unit]
+  if i == 500
+    all_data << data
+    data = []
+    i = 0
+  end
+  i += 1
+end
+
+file_name = 500
+i = 1
+puts all_data.count
+all_data.each do |data|
+
+  FasterCSV.open("tmp/2007-2008-#{file_name*i}.csv", "w") do |csv|
     csv << ["Nome do participante", "Titulo de exibição no certificado",
       "Período", "Carga Horária", "Porcentagem de Frequência", "Total de horas do curso", "Ementa", "Escola"]
     data.each do |d|

@@ -27,7 +27,9 @@ courses.each do |course|
     duration += a.duration
   end
 
-  duration = course.total_hours if !course.total_hours.blank?
+  duration = course.total_hours if !course.total_hours.blank? && course.total_hours.to_i != 0
+
+  duration = duration.round
 
   data = []
   export_data = []
